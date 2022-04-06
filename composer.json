@@ -1,0 +1,36 @@
+{
+    "type": "symfony-bundle",
+    "name": "visual-craft/rest-base-bundle",
+    "description": "Symfony Bundle for comfortable work with rest base api",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4",
+        "symfony/framework-bundle": "^5.4|^6.0",
+        "symfony/serializer": "^5.4|^6.0",
+        "symfony/validator": "^5.4|^6.0",
+        "symfony/property-access": "^5.4|^6.0",
+        "symfony/property-info": "^5.4|^6.0",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "phpstan/phpdoc-parser": "^1.4",
+        "symfony/security-bundle": "^5.4|^6.0",
+        "symfony/yaml": "^5.4|^6.0"
+    },
+    "require-dev": {
+        "doctrine/annotations": "^1.13",
+        "psr/log": "^1.0|^2.0|^3.0",
+        "symfony/phpunit-bridge": "^5.4|^6.0",
+        "symfony/test-pack": "1.0.*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "VisualCraft\\RestBaseBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "VisualCraft\\RestBaseBundle\\Tests\\TestApplication\\": "tests/TestApplication/src/",
+            "VisualCraft\\RestBaseBundle\\Tests\\": "tests/"
+        }
+    }
+}

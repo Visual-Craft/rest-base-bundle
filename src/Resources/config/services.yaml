@@ -1,0 +1,30 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    VisualCraft\RestBaseBundle\Controller\ErrorController:
+        public: true
+        arguments:
+            $errorController: '@error_controller'
+
+    VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory:
+        arguments:
+            $debug: '%kernel.debug%'
+
+    VisualCraft\RestBaseBundle\Request\ApiZoneRequestMatcher: ~
+    VisualCraft\RestBaseBundle\Request\RequestBodyDeserializer: ~
+    VisualCraft\RestBaseBundle\Response\ResponseBuilderFactory: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\AuthenticationExceptionConverter: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\HttpExceptionInterfaceConverter: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InsufficientAuthenticationExceptionConverter: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\ValidationErrorExceptionConverter: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InvalidRequestExceptionConverter: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InvalidRequestBodyFormatExceptionConverter: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InvalidRequestContentTypeExceptionConverter: ~
+    VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint: ~
+    VisualCraft\RestBaseBundle\Serializer\FormatRegistry:
+        arguments:
+            $formatToMimeTypeMap:
+                json: 'application/json'
+                xml: 'application/xml'

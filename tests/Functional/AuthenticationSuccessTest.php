@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace VisualCraft\RestBaseBundle\Tests\Functional;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
+
+class AuthenticationSuccessTest extends WebTestCase
+{
+    public function testAuthenticationSuccess(): void
+    {
+        $client = static::createClient();
+        $client->request(
+            'POST',
+            '/api/login',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            json_encode([
+                'login' => 'user1',
+                'password' => 'correct_password',
+            ])
+        );
+        $response = $client->getResponse();
+
+        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertJsonStringEqualsJsonString('{"login_status": "success"}', $response->getContent());
+    }
+}
