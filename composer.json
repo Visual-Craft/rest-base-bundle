@@ -1,8 +1,8 @@
 {
-    "type": "symfony-bundle",
     "name": "visual-craft/rest-base-bundle",
-    "description": "Symfony Bundle for comfortable work with rest base api",
     "license": "MIT",
+    "type": "symfony-bundle",
+    "description": "Symfony Bundle which provides base foundation for REST API applications",
     "require": {
         "php": ">=7.4",
         "symfony/framework-bundle": "^5.4|^6.0",
