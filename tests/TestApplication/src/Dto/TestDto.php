@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\Tests\TestApplication\Dto;
 
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 class TestDto
 {
     /**
      * @var string|null
-     * @Assert\NotBlank()
      */
     private $field1;
 
@@ -23,6 +23,11 @@ class TestDto
      * @var string|null
      */
     private $field3;
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata): void
+    {
+        $metadata->addPropertyConstraint('field1', new NotBlank());
+    }
 
     /**
      * @return string|null

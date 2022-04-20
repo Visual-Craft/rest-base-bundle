@@ -16,7 +16,7 @@
         "symfony/yaml": "^5.4|^6.0"
     },
     "require-dev": {
-        "doctrine/annotations": "^1.13",
+        "doctrine/annotations": "^1.12",
         "psr/log": "^1.0|^2.0|^3.0",
         "symfony/phpunit-bridge": "^5.4|^6.0",
         "symfony/browser-kit": "^5.4|^6.0",
