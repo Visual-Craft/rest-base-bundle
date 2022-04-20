@@ -36,13 +36,11 @@ jobs:
           ini-values: date.timezone='UTC'
           tools: composer:v2
 
-      - name: Require symfony
-        run: composer --no-update require symfony/symfony:"${SYMFONY}"
-
       - name: Install dependencies
         run: |
           composer update
           vendor/bin/simple-phpunit install
+
       - name: Test
         run: |
           composer validate --strict --no-check-lock
