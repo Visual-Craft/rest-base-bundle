@@ -44,4 +44,4 @@ jobs:
       - name: Test
         run: |
           composer validate --strict --no-check-lock
-          vendor/bin/phpunit --coverage-text --verbose
+          vendor/bin/simple-phpunit
