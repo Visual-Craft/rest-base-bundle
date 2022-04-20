@@ -43,6 +43,10 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
+      - name: "Require doctrine/annotation"
+        if: "matrix.php == '7.4'"
+        run: "composer require doctrine/annotations --no-interaction"
+
       - name: Test
         run: |
           composer validate --strict --no-check-lock
