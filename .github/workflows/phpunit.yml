@@ -34,12 +34,14 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           ini-values: date.timezone='UTC'
-          tools: composer:v2
+          tools: composer:v2,flex
 
       - name: Install dependencies
         run: |
-          composer update
+          composer update --prefer-dist
           vendor/bin/simple-phpunit install
+        env:
+          SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
       - name: Test
         run: |
