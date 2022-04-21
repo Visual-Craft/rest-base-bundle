@@ -29,7 +29,7 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');
         $this->configureZoneMatchListener($container, $config['zone']);
-        $this->configureProblemBuilders($container);
+        $this->configureProblemBuilders($container, $config['debug']);
     }
 
     public function prepend(ContainerBuilder $container): void
@@ -71,7 +71,7 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
         $container->setDefinition($listenerDefinition->getClass(), $listenerDefinition);
     }
 
-    private function configureProblemBuilders(ContainerBuilder $container): void
+    private function configureProblemBuilders(ContainerBuilder $container, string $debugConfig): void
     {
         $container
             ->registerForAutoconfiguration(ExceptionToProblemConverterInterface::class)
@@ -79,6 +79,7 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
         ;
         $container->getDefinition(ProblemResponseFactory::class)
             ->setArgument('$exceptionToProblemConverters', new TaggedIteratorArgument(self::EXCEPTION_TO_PROBLEM_CONVERTER_TAG))
+            ->setArgument('$debug', $debugConfig)
         ;
     }
 }

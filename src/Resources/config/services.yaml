@@ -8,10 +8,7 @@ services:
         arguments:
             $errorController: '@error_controller'
 
-    VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory:
-        arguments:
-            $debug: '%kernel.debug%'
-
+    VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory: ~
     VisualCraft\RestBaseBundle\Request\ApiZoneRequestMatcher: ~
     VisualCraft\RestBaseBundle\Request\RequestBodyDeserializer: ~
     VisualCraft\RestBaseBundle\Response\ResponseBuilderFactory: ~
