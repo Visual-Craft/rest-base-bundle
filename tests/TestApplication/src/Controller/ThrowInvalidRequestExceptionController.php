@@ -10,7 +10,7 @@ use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException;
 
 class ThrowInvalidRequestExceptionController extends AbstractController
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): void
     {
         throw new InvalidRequestException();
     }
