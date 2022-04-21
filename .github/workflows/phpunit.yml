@@ -36,16 +36,16 @@ jobs:
           ini-values: date.timezone='UTC'
           tools: composer:v2,flex
 
-      - name: Cs-check
-        run: |
-          vendor/bin/php-cs-fixer fix --dry-run --diff -v --ansi
-
       - name: Install dependencies
         run: |
           composer update --prefer-dist
           vendor/bin/simple-phpunit install
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony }}"
+
+      - name: Cs-check
+        run: |
+          vendor/bin/php-cs-fixer fix --dry-run --diff -v --ansi
 
       - name: Require doctrine/annotation
         if: matrix.php == '7.4'
