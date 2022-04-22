@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
 
-use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
-use VisualCraft\RestBaseBundle\Problem\Problem;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException;
+use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
+use VisualCraft\RestBaseBundle\Problem\Problem;
 
 class InsufficientAuthenticationExceptionConverter implements ExceptionToProblemConverterInterface
 {

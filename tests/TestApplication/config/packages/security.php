@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 $container->loadFromExtension('security', [
@@ -13,14 +15,14 @@ $container->loadFromExtension('security', [
                 'check_path' => '/api/login',
                 'username_path' => 'login',
                 'password_path' => 'password',
-                'failure_handler' => 'VisualCraft\RestBaseBundle\Tests\TestApplication\Security\AuthenticationFailureHandler'
-            ]
+                'failure_handler' => 'VisualCraft\RestBaseBundle\Tests\TestApplication\Security\AuthenticationFailureHandler',
+            ],
         ],
     ],
     'password_hashers' => [
-            PasswordAuthenticatedUserInterface::class => [
+        PasswordAuthenticatedUserInterface::class => [
             'algorithm' => 'plaintext',
-        ]
+        ],
     ],
     'providers' => [
         'users' => [
@@ -29,8 +31,8 @@ $container->loadFromExtension('security', [
                     'user1' => [
                         'password' => 'correct_password',
                         'roles' => ['ROLE_ADMIN'],
-                    ]
-                ]
+                    ],
+                ],
             ],
         ],
     ],
@@ -38,6 +40,6 @@ $container->loadFromExtension('security', [
         [
             'path' => '^/api/authentication-required',
             'roles' => ['ROLE_ADMIN'],
-        ]
+        ],
     ],
 ]);

@@ -6,6 +6,9 @@ namespace VisualCraft\RestBaseBundle\Tests\Functional;
 
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @internal
+ */
 class AuthenticationExceptionTest extends FunctionalTestCase
 {
     public function testAuthenticationException(): void

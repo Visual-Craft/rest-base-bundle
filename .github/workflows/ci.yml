@@ -43,9 +43,14 @@ jobs:
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
-      - name: "Require doctrine/annotation"
-        if: "matrix.php == '7.4'"
-        run: "composer require doctrine/annotations --no-interaction"
+      - name: Cs-check
+        run: |
+          vendor/bin/php-cs-fixer fix --dry-run --diff -v --ansi
+
+      - name: Require doctrine/annotation
+        if: matrix.php == '7.4'
+        run: composer require doctrine/annotations --no-interaction
+
 
       - name: Test
         run: |

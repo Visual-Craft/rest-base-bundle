@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\DependencyInjection;
 
-use VisualCraft\RestBaseBundle\Controller\ErrorController;
-use VisualCraft\RestBaseBundle\EventListener\ZoneMatchListener;
-use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
-use VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,6 +13,10 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpFoundation\RequestMatcher;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\HttpKernel\KernelEvents;
+use VisualCraft\RestBaseBundle\Controller\ErrorController;
+use VisualCraft\RestBaseBundle\EventListener\ZoneMatchListener;
+use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
+use VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory;
 
 class VisualCraftRestBaseExtension extends Extension implements PrependExtensionInterface
 {

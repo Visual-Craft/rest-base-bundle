@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\Request;
 
-use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException;
-use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException;
-use VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException;
-use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Exception\ExtraAttributesException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException;
+use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException;
+use VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException;
+use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 
 class RequestBodyDeserializer
 {
@@ -32,8 +32,11 @@ class RequestBodyDeserializer
      */
     private $formatRegistry;
 
-    public function __construct(SerializerInterface $serializer, FormatRegistry $formatRegistry, ValidatorInterface $validator)
-    {
+    public function __construct(
+        SerializerInterface $serializer,
+        FormatRegistry $formatRegistry,
+        ValidatorInterface $validator
+    ) {
         $this->serializer = $serializer;
         $this->formatRegistry = $formatRegistry;
         $this->validator = $validator;

@@ -48,7 +48,7 @@ final class Kernel extends SymfonyKernel
 
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
-        $routes->import($this->getProjectDir().'/config/routes.php');
+        $routes->import($this->getProjectDir() . '/config/routes.php');
     }
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void

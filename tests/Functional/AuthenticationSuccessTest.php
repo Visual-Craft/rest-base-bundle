@@ -7,6 +7,9 @@ namespace VisualCraft\RestBaseBundle\Tests\Functional;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @internal
+ */
 class AuthenticationSuccessTest extends WebTestCase
 {
     public function testAuthenticationSuccess(): void
@@ -25,7 +28,7 @@ class AuthenticationSuccessTest extends WebTestCase
         );
         $response = $client->getResponse();
 
-        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
         $this->assertJsonStringEqualsJsonString('{"login_status": "success"}', $response->getContent());
     }
 }

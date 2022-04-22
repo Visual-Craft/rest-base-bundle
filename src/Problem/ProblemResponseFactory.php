@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\Problem;
 
-use VisualCraft\RestBaseBundle\Response\ResponseBuilderFactory;
 use Symfony\Component\HttpFoundation\Response;
+use VisualCraft\RestBaseBundle\Response\ResponseBuilderFactory;
 
 class ProblemResponseFactory
 {
@@ -24,8 +24,11 @@ class ProblemResponseFactory
      */
     private $debug;
 
-    public function __construct(ResponseBuilderFactory $responseFactory, ?iterable $exceptionToProblemConverters = null, bool $debug = false)
-    {
+    public function __construct(
+        ResponseBuilderFactory $responseFactory,
+        ?iterable $exceptionToProblemConverters = null,
+        bool $debug = false
+    ) {
         $this->responseFactory = $responseFactory;
         $this->exceptionToProblemConverters = $exceptionToProblemConverters;
         $this->debug = $debug;

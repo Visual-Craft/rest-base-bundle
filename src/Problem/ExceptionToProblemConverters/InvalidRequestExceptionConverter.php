@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
 
+use Symfony\Component\HttpFoundation\Response;
 use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
-use Symfony\Component\HttpFoundation\Response;
 
 class InvalidRequestExceptionConverter implements ExceptionToProblemConverterInterface
 {
