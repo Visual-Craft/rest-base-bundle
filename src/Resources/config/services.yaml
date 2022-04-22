@@ -20,8 +20,4 @@ services:
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InvalidRequestBodyFormatExceptionConverter: ~
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InvalidRequestContentTypeExceptionConverter: ~
     VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint: ~
-    VisualCraft\RestBaseBundle\Serializer\FormatRegistry:
-        arguments:
-            $formatToMimeTypeMap:
-                json: 'application/json'
-                xml: 'application/xml'
+    VisualCraft\RestBaseBundle\Serializer\FormatRegistry: ~

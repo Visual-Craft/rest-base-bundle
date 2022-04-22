@@ -35,6 +35,14 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->booleanNode('debug')->defaultValue('%kernel.debug%')->end()
+                ->arrayNode('mimeTypes')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('json')
+                            ->defaultValue('application/json')
+                            ->cannotBeEmpty()
+                    ->end()
+                ->end()
             ->end()
         ;
 
