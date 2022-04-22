@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\Response;
 
-use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 use Symfony\Component\Serializer\SerializerInterface;
+use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 
 class ResponseBuilderFactory
 {

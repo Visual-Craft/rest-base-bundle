@@ -6,6 +6,9 @@ namespace VisualCraft\RestBaseBundle\Tests\Functional;
 
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @internal
+ */
 class ValidationErrorExceptionTest extends FunctionalTestCase
 {
     public function testValidationErrorException(): void

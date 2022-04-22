@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\Response;
 
-use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
+use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 
 class ResponseBuilder
 {
@@ -61,6 +61,13 @@ class ResponseBuilder
         return $this;
     }
 
+    public function setSerializerContext(array $value): self
+    {
+        $this->serializerContext = $value;
+
+        return $this;
+    }
+
     public function setStatusCode(int $value): self
     {
         $this->response->setStatusCode($value);
@@ -85,13 +92,6 @@ class ResponseBuilder
     public function addHeader(string $name, array $value): self
     {
         $this->response->headers->set($name, $value, false);
-
-        return $this;
-    }
-
-    public function setSerializerContext(array $value): self
-    {
-        $this->serializerContext = $value;
 
         return $this;
     }

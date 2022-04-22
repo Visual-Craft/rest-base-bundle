@@ -13,8 +13,12 @@ class ValidationErrorException extends \RuntimeException
      */
     private $violationList;
 
-    public function __construct(ConstraintViolationListInterface $violationList, string $message = '', int $code = 0, \Throwable $previous = null)
-    {
+    public function __construct(
+        ConstraintViolationListInterface $violationList,
+        string $message = '',
+        int $code = 0,
+        \Throwable $previous = null
+    ) {
         parent::__construct($message, $code, $previous);
         $this->violationList = $violationList;
     }

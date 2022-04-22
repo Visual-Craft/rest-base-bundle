@@ -24,21 +24,12 @@ class TestDto
      */
     private $field3;
 
-    public static function loadValidatorMetadata(ClassMetadata $metadata): void
-    {
-        $metadata->addPropertyConstraint('field1', new NotBlank());
-    }
-
-    /**
-     * @return string|null
-     */
     public function getField1(): ?string
     {
         return $this->field1;
     }
 
     /**
-     * @param string|null $value
      * @return $this
      */
     public function setField1(?string $value): self
@@ -48,16 +39,12 @@ class TestDto
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getField2(): ?string
     {
         return $this->field2;
     }
 
     /**
-     * @param string|null $value
      * @return $this
      */
     public function setField2(?string $value): self
@@ -67,16 +54,12 @@ class TestDto
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getField3(): ?string
     {
         return $this->field3;
     }
 
     /**
-     * @param string|null $value
      * @return $this
      */
     public function setField3(?string $value): self
@@ -84,5 +67,10 @@ class TestDto
         $this->field3 = $value;
 
         return $this;
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata): void
+    {
+        $metadata->addPropertyConstraint('field1', new NotBlank());
     }
 }

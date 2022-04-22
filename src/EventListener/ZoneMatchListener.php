@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\EventListener;
 
-use VisualCraft\RestBaseBundle\Constants;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
+use VisualCraft\RestBaseBundle\Constants;
 
 class ZoneMatchListener
 {

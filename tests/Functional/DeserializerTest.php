@@ -7,6 +7,9 @@ namespace VisualCraft\RestBaseBundle\Tests\Functional;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @internal
+ */
 class DeserializerTest extends WebTestCase
 {
     public function testDeserializer(): void
@@ -23,7 +26,7 @@ class DeserializerTest extends WebTestCase
         );
         $response = $client->getResponse();
 
-        $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
         $this->assertJsonStringEqualsJsonString($encodedData, $response->getContent());
     }
 }

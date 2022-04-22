@@ -67,11 +67,6 @@ class Problem
         return $this;
     }
 
-    public function addDetails(string $key, $value): void
-    {
-        $this->details[$key] = $value;
-    }
-
     public function getHeaders(): array
     {
         return $this->headers;
@@ -82,5 +77,10 @@ class Problem
         $this->headers = $value;
 
         return $this;
+    }
+
+    public function addDetails(string $key, $value): void
+    {
+        $this->details[$key] = $value;
     }
 }
