@@ -21,7 +21,7 @@ $configuration = [
         'VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException' => [
             'log_level' => 'error',
         ],
-    ]
+    ],
 ];
 
 $container->loadFromExtension('framework', $configuration);
