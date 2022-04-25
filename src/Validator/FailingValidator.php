@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\Validator;
 
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException;
 
@@ -16,9 +17,14 @@ class FailingValidator
         $this->validator = $validator;
     }
 
-    public function validate($data): void
+    /**
+     * @param mixed $value
+     * @param Constraint|Constraint[] $constraints
+     * @throws ValidationErrorException
+     */
+    public function validate($value, $constraints = null): void
     {
-        $violations = $this->validator->validate($data);
+        $violations = $this->validator->validate($value, $constraints);
 
         if (\count($violations) > 0) {
             throw new ValidationErrorException($violations);

@@ -11,8 +11,8 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException;
 use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException;
-use VisualCraft\RestBaseBundle\Validator\FailingValidator;
 use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
+use VisualCraft\RestBaseBundle\Validator\FailingValidator;
 
 class RequestBodyDeserializer
 {
