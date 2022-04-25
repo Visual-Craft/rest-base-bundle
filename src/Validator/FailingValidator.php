@@ -7,7 +7,7 @@ namespace VisualCraft\RestBaseBundle\Validator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException;
 
-class RestBaseValidator
+class FailingValidator
 {
     private ValidatorInterface $validator;
 
