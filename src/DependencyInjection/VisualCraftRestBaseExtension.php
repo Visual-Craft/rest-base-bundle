@@ -17,6 +17,7 @@ use VisualCraft\RestBaseBundle\Controller\ErrorController;
 use VisualCraft\RestBaseBundle\EventListener\ZoneMatchListener;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory;
+use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 
 class VisualCraftRestBaseExtension extends Extension implements PrependExtensionInterface
 {
@@ -30,6 +31,7 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
         $loader->load('services.yaml');
         $this->configureZoneMatchListener($container, $config['zone']);
         $this->configureProblemBuilders($container, $config['debug']);
+        $this->configureSerializer($container, $config['mimeTypes']);
     }
 
     public function prepend(ContainerBuilder $container): void
@@ -80,6 +82,13 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
         $container->getDefinition(ProblemResponseFactory::class)
             ->setArgument('$exceptionToProblemConverters', new TaggedIteratorArgument(self::EXCEPTION_TO_PROBLEM_CONVERTER_TAG))
             ->setArgument('$debug', $debugConfig)
+        ;
+    }
+
+    private function configureSerializer(ContainerBuilder $container, array $mimeTypesConfig): void
+    {
+        $container->getDefinition(FormatRegistry::class)
+            ->setArgument('$formatToMimeTypeMap', $mimeTypesConfig)
         ;
     }
 }

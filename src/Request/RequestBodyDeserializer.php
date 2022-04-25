@@ -9,11 +9,10 @@ use Symfony\Component\Serializer\Exception\ExtraAttributesException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException;
 use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException;
-use VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException;
 use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
+use VisualCraft\RestBaseBundle\Validator\FailingValidator;
 
 class RequestBodyDeserializer
 {
@@ -23,19 +22,16 @@ class RequestBodyDeserializer
     private $serializer;
 
     /**
-     * @var ValidatorInterface
-     */
-    private $validator;
-
-    /**
      * @var FormatRegistry
      */
     private $formatRegistry;
 
+    private FailingValidator $validator;
+
     public function __construct(
         SerializerInterface $serializer,
         FormatRegistry $formatRegistry,
-        ValidatorInterface $validator
+        FailingValidator $validator
     ) {
         $this->serializer = $serializer;
         $this->formatRegistry = $formatRegistry;
@@ -85,11 +81,7 @@ class RequestBodyDeserializer
             throw new InvalidRequestBodyFormatException('Unable to deserialize data since it contains extra attributes', 0, $e);
         }
 
-        $violations = $this->validator->validate($data);
-
-        if (\count($violations) > 0) {
-            throw new ValidationErrorException($violations);
-        }
+        $this->validator->validate($data);
 
         return $data;
     }
