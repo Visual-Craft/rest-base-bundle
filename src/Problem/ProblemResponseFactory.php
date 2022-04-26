@@ -94,6 +94,7 @@ class ProblemResponseFactory
 
     /**
      * @return \Generator|\Throwable[]
+     * @psalm-return \Generator<int, \Throwable>
      */
     private function getExceptionsChain(\Throwable $exception): \Generator
     {
