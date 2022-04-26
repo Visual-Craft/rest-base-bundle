@@ -4,24 +4,30 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException;
+use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException;
+use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException;
+use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException;
+use VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException;
+
 return static function (ContainerConfigurator $container): void {
     $configuration = [
         'secret' => 'F00',
         'test' => true,
         'exceptions' => [
-            'VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException' => [
+            InvalidRequestBodyFormatException::class => [
                 'log_level' => 'error',
             ],
-            'Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException' => [
+            InsufficientAuthenticationException::class => [
                 'log_level' => 'error',
             ],
-            'VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException' => [
+            InvalidRequestContentTypeException::class => [
                 'log_level' => 'error',
             ],
-            'VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException' => [
+            InvalidRequestException::class => [
                 'log_level' => 'error',
             ],
-            'VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException' => [
+            ValidationErrorException::class => [
                 'log_level' => 'error',
             ],
         ],

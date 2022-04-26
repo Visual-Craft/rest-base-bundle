@@ -12,6 +12,9 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('visual_craft_rest_base');
+        /**
+         * @psalm-suppress PossiblyNullReference, PossiblyUndefinedMethod, MixedMethodCall
+         */
         $treeBuilder->getRootNode()
             ->children()
                 ->arrayNode('zone')

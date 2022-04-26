@@ -7,15 +7,21 @@ namespace VisualCraft\RestBaseBundle\Serializer;
 class FormatRegistry
 {
     /**
-     * @var array
+     * @var string[]
+     * @psalm-var array<string, string>
      */
     private $formatToMimeTypeMap;
 
     /**
-     * @var array
+     * @var string[]
+     * @psalm-var array<string, string>
      */
     private $mimeTypeMapToFormat;
 
+    /**
+     * @param string[] $formatToMimeTypeMap
+     * @psalm-param array<string, string> $formatToMimeTypeMap
+     */
     public function __construct(array $formatToMimeTypeMap)
     {
         $this->formatToMimeTypeMap = $formatToMimeTypeMap;

@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace VisualCraft\RestBaseBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Controller\ErrorController as SymfonyErrorController;
+use VisualCraft\RestBaseBundle\Constants;
 use VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory;
-use VisualCraft\RestBaseBundle\Request\ApiZoneRequestMatcher;
 
 class ErrorController
 {
@@ -19,35 +18,19 @@ class ErrorController
     private $errorController;
 
     /**
-     * @var RequestStack
-     */
-    private $requestStack;
-
-    /**
      * @var ProblemResponseFactory
      */
     private $problemResponseFactory;
 
-    /**
-     * @var ApiZoneRequestMatcher
-     */
-    private $apiZoneRequestMatcher;
-
-    public function __construct(
-        SymfonyErrorController $errorController,
-        RequestStack $requestStack,
-        ProblemResponseFactory $problemResponseFactory,
-        ApiZoneRequestMatcher $apiZoneRequestMatcher
-    ) {
+    public function __construct(SymfonyErrorController $errorController, ProblemResponseFactory $problemResponseFactory)
+    {
         $this->errorController = $errorController;
-        $this->requestStack = $requestStack;
         $this->problemResponseFactory = $problemResponseFactory;
-        $this->apiZoneRequestMatcher = $apiZoneRequestMatcher;
     }
 
-    public function __invoke(\Throwable $exception): Response
+    public function __invoke(\Throwable $exception, Request $request): Response
     {
-        if ($this->apiZoneRequestMatcher->matches($this->requestStack->getCurrentRequest())) {
+        if ($request->attributes->get(Constants::API_ZONE_ATTRIBUTE, false)) {
             return $this->problemResponseFactory->create($exception);
         }
 

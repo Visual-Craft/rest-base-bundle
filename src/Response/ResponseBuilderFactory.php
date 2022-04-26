@@ -25,6 +25,9 @@ class ResponseBuilderFactory
         $this->formatRegistry = $formatRegistry;
     }
 
+    /**
+     * @param mixed $data
+     */
     public function create($data): ResponseBuilder
     {
         return new ResponseBuilder($this->serializer, $this->formatRegistry, $data);

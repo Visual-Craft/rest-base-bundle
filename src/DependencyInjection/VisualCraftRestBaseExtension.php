@@ -26,6 +26,13 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
 
     public function load(array $configs, ContainerBuilder $container): void
     {
+        /**
+         * @psalm-var array{
+         *     zone: list<array{path: string, host: string, methods: list<string>, ips: list<string>}>,
+         *     debug: bool|string,
+         *     mimeTypes: array<string, string>
+         * }
+         */
         $config = $this->processConfiguration(new Configuration(), $configs);
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');
@@ -41,18 +48,15 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
         ]);
     }
 
+    /**
+     * @psalm-param list<array{path: string, host: string, methods: list<string>, ips: list<string>}> $zoneConfig
+     */
     private function configureZoneMatchListener(ContainerBuilder $container, array $zoneConfig): void
     {
         if (!$zoneConfig) {
             return;
         }
 
-        $listenerDefinition = new Definition(ZoneMatchListener::class);
-        $listenerDefinition->addTag('kernel.event_listener', [
-            'event' => KernelEvents::REQUEST,
-            'method' => 'onKernelRequest',
-            'priority' => 248,
-        ]);
         $matcherIndex = 0;
 
         foreach ($zoneConfig as $item) {
@@ -69,11 +73,20 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
             $container->setDefinition(self::ZONE_REQUEST_MATCHER_TAG . '.instance_' . $matcherIndex++, $matcherDefinition);
         }
 
+        $listenerDefinition = new Definition(ZoneMatchListener::class);
+        $listenerDefinition->addTag('kernel.event_listener', [
+            'event' => KernelEvents::REQUEST,
+            'method' => 'onKernelRequest',
+            'priority' => 248,
+        ]);
         $listenerDefinition->setArgument('$requestMatchers', new TaggedIteratorArgument(self::ZONE_REQUEST_MATCHER_TAG));
-        $container->setDefinition($listenerDefinition->getClass(), $listenerDefinition);
+        $container->setDefinition(ZoneMatchListener::class, $listenerDefinition);
     }
 
-    private function configureProblemBuilders(ContainerBuilder $container, string $debugConfig): void
+    /**
+     * @param bool|string $debugConfig
+     */
+    private function configureProblemBuilders(ContainerBuilder $container, $debugConfig): void
     {
         $container
             ->registerForAutoconfiguration(ExceptionToProblemConverterInterface::class)
@@ -85,6 +98,9 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
         ;
     }
 
+    /**
+     * @psalm-param array<string, string> $mimeTypesConfig
+     */
     private function configureSerializer(ContainerBuilder $container, array $mimeTypesConfig): void
     {
         $container->getDefinition(FormatRegistry::class)

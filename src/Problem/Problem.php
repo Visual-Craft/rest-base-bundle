@@ -79,6 +79,9 @@ class Problem
         return $this;
     }
 
+    /**
+     * @param mixed $value
+     */
     public function addDetails(string $key, $value): void
     {
         $this->details[$key] = $value;

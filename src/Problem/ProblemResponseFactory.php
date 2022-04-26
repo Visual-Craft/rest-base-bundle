@@ -16,6 +16,7 @@ class ProblemResponseFactory
 
     /**
      * @var ExceptionToProblemConverterInterface[]|iterable|null
+     * @psalm-var iterable<array-key, ExceptionToProblemConverterInterface>|null
      */
     private $exceptionToProblemConverters;
 
@@ -24,6 +25,10 @@ class ProblemResponseFactory
      */
     private $debug;
 
+    /**
+     * @param ExceptionToProblemConverterInterface[]|iterable|null $exceptionToProblemConverters
+     * @psalm-param iterable<array-key, ExceptionToProblemConverterInterface>|null $exceptionToProblemConverters
+     */
     public function __construct(
         ResponseBuilderFactory $responseFactory,
         ?iterable $exceptionToProblemConverters = null,
@@ -40,7 +45,9 @@ class ProblemResponseFactory
 
         if ($this->exceptionToProblemConverters !== null) {
             foreach ($this->exceptionToProblemConverters as $problemBuilder) {
-                if (($problem = $problemBuilder->convert($exception)) !== null) {
+                $problem = $problemBuilder->convert($exception);
+
+                if ($problem !== null) {
                     break;
                 }
             }
