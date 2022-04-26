@@ -2,26 +2,36 @@
 
 declare(strict_types=1);
 
-$configuration = [
-    'secret' => 'F00',
-    'test' => true,
-    'exceptions' => [
-        'VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException' => [
-            'log_level' => 'error',
-        ],
-        'Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException' => [
-            'log_level' => 'error',
-        ],
-        'VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException' => [
-            'log_level' => 'error',
-        ],
-        'VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException' => [
-            'log_level' => 'error',
-        ],
-        'VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException' => [
-            'log_level' => 'error',
-        ],
-    ],
-];
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-$container->loadFromExtension('framework', $configuration);
+use Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException;
+use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException;
+use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException;
+use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException;
+use VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException;
+
+return static function (ContainerConfigurator $container): void {
+    $configuration = [
+        'secret' => 'F00',
+        'test' => true,
+        'exceptions' => [
+            InvalidRequestBodyFormatException::class => [
+                'log_level' => 'error',
+            ],
+            InsufficientAuthenticationException::class => [
+                'log_level' => 'error',
+            ],
+            InvalidRequestContentTypeException::class => [
+                'log_level' => 'error',
+            ],
+            InvalidRequestException::class => [
+                'log_level' => 'error',
+            ],
+            ValidationErrorException::class => [
+                'log_level' => 'error',
+            ],
+        ],
+    ];
+
+    $container->extension('framework', $configuration);
+};

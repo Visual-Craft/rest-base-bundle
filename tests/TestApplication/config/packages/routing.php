@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
-$container->loadFromExtension('framework', [
-    'router' => [
-        'utf8' => true,
-    ],
-]);
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+return static function (ContainerConfigurator $container): void {
+    $container->extension('framework', [
+        'router' => [
+            'utf8' => true,
+        ],
+    ]);
+};

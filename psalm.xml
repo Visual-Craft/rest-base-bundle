@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="1"
+    hideExternalErrors="true"
+    usePhpDocMethodsWithoutMagicCall="true"
+    ignoreInternalFunctionFalseReturn="false"
+    ignoreInternalFunctionNullReturn="false"
+    ensureArrayStringOffsetsExist="true"
+    sealAllMethods="true"
+    findUnusedCode="true"
+    findUnusedVariablesAndParams="true"
+    findUnusedPsalmSuppress="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <directory name="tests"/>
+        <ignoreFiles>
+            <directory name="vendor"/>
+        </ignoreFiles>
+    </projectFiles>
+    <forbiddenFunctions>
+        <function name="dd"/>
+        <function name="dump"/>
+    </forbiddenFunctions>
+    <issueHandlers>
+        <MixedAssignment errorLevel="suppress">
+        </MixedAssignment>
+        <!-- suppress dead code issues-->
+        <UnusedClass errorLevel="suppress"/>
+        <PossiblyUnusedMethod errorLevel="suppress"/>
+        <PossiblyUnusedProperty errorLevel="suppress"/>
+    </issueHandlers>
+    <stubs>
+        <file name="stubs/Response.stubphp"/>
+    </stubs>
+    <plugins>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+    </plugins>
+</psalm>

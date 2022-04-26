@@ -24,7 +24,7 @@ class ProcessRequestController extends AbstractController
 
     public function __invoke(Request $request): JsonResponse
     {
-        /** @var TestDto $dto */
+        /** @var TestDto $testDto */
         $testDto = $this->deserializer->deserialize($request, TestDto::class);
 
         return new JsonResponse([

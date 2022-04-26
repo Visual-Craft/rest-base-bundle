@@ -13,6 +13,9 @@ use Symfony\Component\HttpKernel\Kernel as SymfonyKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use VisualCraft\RestBaseBundle\VisualCraftRestBaseBundle;
 
+/**
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 final class Kernel extends SymfonyKernel
 {
     use MicroKernelTrait;
