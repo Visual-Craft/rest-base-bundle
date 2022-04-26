@@ -28,7 +28,7 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
     {
         /**
          * @psalm-var array{
-         *     zone: list<array{path: string, host: string, methods: list<string>, ips: list<string>}>,
+         *     zone: list<array{path: string|null, host: string|null, methods: list<string>, ips: list<string>}>,
          *     debug: bool|string,
          *     mimeTypes: array<string, string>
          * }
@@ -49,7 +49,7 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
     }
 
     /**
-     * @psalm-param list<array{path: string, host: string, methods: list<string>, ips: list<string>}> $zoneConfig
+     * @psalm-param list<array{path: string|null, host: string|null, methods: list<string>, ips: list<string>}> $zoneConfig
      */
     private function configureZoneMatchListener(ContainerBuilder $container, array $zoneConfig): void
     {
