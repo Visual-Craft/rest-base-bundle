@@ -21,7 +21,8 @@
         "symfony/phpunit-bridge": "^5.4|^6.0",
         "symfony/browser-kit": "^5.4|^6.0",
         "ext-json": "*",
-        "visual-craft/php-cs-fixer-config": "^0.2.0"
+        "visual-craft/php-cs-fixer-config": "^0.2.0",
+        "matthiasnoback/symfony-config-test": "^4.3"
     },
     "autoload": {
         "psr-4": {
