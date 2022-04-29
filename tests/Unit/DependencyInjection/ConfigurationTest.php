@@ -56,42 +56,6 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
-    /**
-     * @dataProvider debugValidDataProvider
-     */
-    public function testDebugValid($configurationValues, $expectedProcessedConfigurationValues): void
-    {
-        $this->assertProcessedConfigurationEquals(
-            [
-                [
-                    'debug' => $configurationValues,
-                ],
-            ],
-            [
-                'debug' => $expectedProcessedConfigurationValues,
-            ],
-            'debug'
-        );
-    }
-
-    /**
-     * @dataProvider mimeTypesValidDataProvider
-     */
-    public function testMimeTypesValid(array $configurationValues, array $expectedProcessedConfigurationValues): void
-    {
-        $this->assertProcessedConfigurationEquals(
-            [
-                [
-                    'mimeTypes' => $configurationValues,
-                ],
-            ],
-            [
-                'mimeTypes' => $expectedProcessedConfigurationValues,
-            ],
-            'mimeTypes'
-        );
-    }
-
     public function zoneValidDataProvider(): iterable
     {
         yield [[], []];
@@ -175,6 +139,24 @@ class ConfigurationTest extends WebTestCase
         ];
     }
 
+    /**
+     * @dataProvider debugValidDataProvider
+     */
+    public function testDebugValid($configurationValues, $expectedProcessedConfigurationValues): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'debug' => $configurationValues,
+                ],
+            ],
+            [
+                'debug' => $expectedProcessedConfigurationValues,
+            ],
+            'debug'
+        );
+    }
+
     public function debugValidDataProvider(): iterable
     {
         yield [
@@ -185,6 +167,24 @@ class ConfigurationTest extends WebTestCase
             false,
             false,
         ];
+    }
+
+    /**
+     * @dataProvider mimeTypesValidDataProvider
+     */
+    public function testMimeTypesValid(array $configurationValues, array $expectedProcessedConfigurationValues): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'mimeTypes' => $configurationValues,
+                ],
+            ],
+            [
+                'mimeTypes' => $expectedProcessedConfigurationValues,
+            ],
+            'mimeTypes'
+        );
     }
 
     public function mimeTypesValidDataProvider(): iterable
