@@ -12,9 +12,14 @@ class ZoneMatchListener
 {
     /**
      * @var iterable|RequestMatcherInterface[]
+     * @psalm-var iterable<array-key, RequestMatcherInterface>
      */
     private $requestMatchers;
 
+    /**
+     * @param iterable|RequestMatcherInterface[] $requestMatchers
+     * @psalm-param iterable<array-key, RequestMatcherInterface> $requestMatchers
+     */
     public function __construct(iterable $requestMatchers)
     {
         $this->requestMatchers = $requestMatchers;

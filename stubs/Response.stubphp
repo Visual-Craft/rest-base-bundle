@@ -1,0 +1,12 @@
+<?php
+
+namespace Symfony\Component\HttpFoundation;
+
+class Response
+{
+    /**
+     * @var array<int, string>
+     */
+    public static $statusTexts = [];
+}
+

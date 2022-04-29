@@ -40,6 +40,9 @@ class ResponseBuilder
      */
     private $serializerContext;
 
+    /**
+     * @param mixed $data
+     */
     public function __construct(SerializerInterface $serializer, FormatRegistry $formatRegistry, $data)
     {
         $this->serializer = $serializer;
@@ -48,17 +51,6 @@ class ResponseBuilder
         $this->serializerContext = [];
         $this->response = new Response('', 200);
         $this->setFormat('json');
-    }
-
-    public function setFormat(string $value): self
-    {
-        if (!$this->formatRegistry->isFormatSupported($value)) {
-            throw new \LogicException('Unsupported format');
-        }
-
-        $this->format = $value;
-
-        return $this;
     }
 
     public function setSerializerContext(array $value): self
@@ -82,6 +74,10 @@ class ResponseBuilder
         return $this;
     }
 
+    /**
+     * @param string[] $value
+     * @return $this
+     */
     public function setHeader(string $name, array $value): self
     {
         $this->response->headers->set($name, $value);
@@ -89,6 +85,10 @@ class ResponseBuilder
         return $this;
     }
 
+    /**
+     * @param string[] $value
+     * @return $this
+     */
     public function addHeader(string $name, array $value): self
     {
         $this->response->headers->set($name, $value, false);
@@ -110,5 +110,16 @@ class ResponseBuilder
         $this->response->headers->set('Content-Type', $this->formatRegistry->getMimeTypeByFormat($this->format));
 
         return $this->response;
+    }
+
+    private function setFormat(string $value): self
+    {
+        if (!$this->formatRegistry->isFormatSupported($value)) {
+            throw new \LogicException('Unsupported format');
+        }
+
+        $this->format = $value;
+
+        return $this;
     }
 }

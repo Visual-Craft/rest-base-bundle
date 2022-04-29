@@ -38,10 +38,11 @@ class RequestBodyDeserializer
         $this->validator = $validator;
     }
 
+    /**
+     * @return mixed
+     */
     public function deserialize(Request $request, string $type, ?string $forcedFormat = null)
     {
-        $format = null;
-
         if ($forcedFormat !== null) {
             if (!$this->formatRegistry->isFormatSupported($forcedFormat)) {
                 throw new \LogicException('Unsupported format');
@@ -49,7 +50,9 @@ class RequestBodyDeserializer
 
             $format = $forcedFormat;
         } else {
-            if (!$request->headers->has('Content-Type')) {
+            $contentType = $request->headers->get('Content-Type');
+
+            if (!$contentType) {
                 throw new InvalidRequestContentTypeException(
                     'Missing Content-Type',
                     InvalidRequestContentTypeException::CODE_MISSING,
@@ -57,7 +60,7 @@ class RequestBodyDeserializer
                 );
             }
 
-            $format = $this->formatRegistry->getFormatByMimeType($request->headers->get('Content-Type'));
+            $format = $this->formatRegistry->getFormatByMimeType($contentType);
 
             if ($format === null) {
                 throw new InvalidRequestContentTypeException(
