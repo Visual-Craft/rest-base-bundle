@@ -31,8 +31,8 @@ class ConfigurationTest extends TestCase
                     'debug' => true,
                     'mimeTypes' => [
                         'json' => 'application/json',
-                        'xml' => 'application/xml'
-                    ]
+                        'xml' => 'application/xml',
+                    ],
                 ],
             ]
         );
@@ -42,14 +42,14 @@ class ConfigurationTest extends TestCase
                 [
                     'mimeTypes' => [
                         'xml' => 'application/xml',
-                    ]
+                    ],
                 ],
             ],
             [
                 'mimeTypes' => [
                     'xml' => 'application/xml',
                     'json' => 'application/json',
-                ]
+                ],
             ],
             'mimeTypes'
         );
@@ -59,14 +59,14 @@ class ConfigurationTest extends TestCase
                 [
                     'mimeTypes' => [
                         'json' => 'application/json',
-                    ]
+                    ],
                 ],
             ],
             [
                 'mimeTypes' => [
                     'xml' => 'application/xml',
                     'json' => 'application/json',
-                ]
+                ],
             ],
             'mimeTypes'
         );
