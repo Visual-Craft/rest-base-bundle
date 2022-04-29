@@ -40,7 +40,7 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('debug')->defaultValue('%kernel.debug%')->end()
                 ->arrayNode('mimeTypes')
                     ->useAttributeAsKey('name')
-                    ->scalarPrototype()
+                    ->prototype('scalar')
                     ->defaultValue(['json' => 'application/json'])
                 ->end()
             ->end()
