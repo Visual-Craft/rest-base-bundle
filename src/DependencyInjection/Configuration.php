@@ -41,7 +41,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('mimeTypes')
                     ->defaultValue(['json' => 'application/json'])
                     ->useAttributeAsKey('name')
-                    ->prototype('scalar')
+                    ->scalarPrototype()->end()
                 ->end()
             ->end()
         ;
