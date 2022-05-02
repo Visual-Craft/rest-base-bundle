@@ -92,14 +92,14 @@ class ConfigurationTest extends WebTestCase
         yield [
             [
                 [
-                    'methods' => ['testMethod'],
+                    'methods' => ['POST'],
                 ],
             ],
             [
                 [
                     'path' => null,
                     'host' => null,
-                    'methods' => ['testMethod'],
+                    'methods' => ['POST'],
                     'ips' => [],
                 ],
             ],
@@ -107,7 +107,7 @@ class ConfigurationTest extends WebTestCase
         yield [
             [
                 [
-                    'ips' => ['testIps'],
+                    'ips' => ['192.168.1.0/24'],
                 ],
             ],
             [
@@ -115,7 +115,7 @@ class ConfigurationTest extends WebTestCase
                     'path' => null,
                     'host' => null,
                     'methods' => [],
-                    'ips' => ['testIps'],
+                    'ips' => ['192.168.1.0/24'],
                 ],
             ],
         ];
@@ -124,16 +124,16 @@ class ConfigurationTest extends WebTestCase
                 [
                     'path' => 'testPath',
                     'host' => 'testHost',
-                    'methods' => ['testMethod'],
-                    'ips' => ['testIps'],
+                    'methods' => ['POST'],
+                    'ips' => ['192.168.1.0/24'],
                 ],
             ],
             [
                 [
                     'path' => 'testPath',
                     'host' => 'testHost',
-                    'methods' => ['testMethod'],
-                    'ips' => ['testIps'],
+                    'methods' => ['POST'],
+                    'ips' => ['192.168.1.0/24'],
                 ],
             ],
         ];
