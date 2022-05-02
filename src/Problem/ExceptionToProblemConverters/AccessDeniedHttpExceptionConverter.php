@@ -6,7 +6,6 @@ namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
 

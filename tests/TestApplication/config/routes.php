@@ -5,9 +5,14 @@ declare(strict_types=1);
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\LoginController;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\ProcessRequestController;
+use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\ThrowAccessDeniedHttpExceptionController;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\ThrowInvalidRequestExceptionController;
 
 return function (RoutingConfigurator $routes): void {
+    $routes
+        ->add('access_denied_request', '/api/access-denied-request')
+        ->controller(ThrowAccessDeniedHttpExceptionController::class)
+    ;
     $routes
         ->add('invalid_request', '/api/invalid-request')
         ->controller(ThrowInvalidRequestExceptionController::class)
