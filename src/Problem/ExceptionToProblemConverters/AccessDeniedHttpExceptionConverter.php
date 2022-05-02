@@ -18,7 +18,7 @@ class AccessDeniedHttpExceptionConverter implements ExceptionToProblemConverterI
         }
 
         return new Problem(
-            'Access denied http error: ' . $exception->getMessageKey(),
+            'Access denied http error',
             Response::HTTP_FORBIDDEN,
             'access_denied_http'
         );
