@@ -13,14 +13,15 @@
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.4",
         "symfony/security-bundle": "^5.4|^6.0",
-        "doctrine/annotations": "^1.13",
-        "symfony/yaml": "^5.4|^6.0"
+        "symfony/yaml": "^5.4|^6.0",
+        "doctrine/annotations": "^1.13"
     },
     "require-dev": {
         "psr/log": "^1.0|^2.0|^3.0",
         "symfony/phpunit-bridge": "^5.4|^6.0",
         "symfony/browser-kit": "^5.4|^6.0",
         "ext-json": "*",
+        "matthiasnoback/symfony-config-test": "^4.3",
         "visual-craft/php-cs-fixer-config": "^0.2.0",
         "psalm/plugin-symfony": "^3.1",
         "vimeo/psalm": "^4.22",
