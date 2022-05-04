@@ -24,8 +24,8 @@ class AccessDeniedHttpExceptionTest extends FunctionalTestCase
         $this->assertProblemResponse(
             $client->getResponse(),
             Response::HTTP_FORBIDDEN,
-            'access_denied_http',
-            'Access denied http error'
+            'forbidden',
+            'Access Denied error: Forbidden'
         );
     }
 }

@@ -13,14 +13,14 @@ class AccessDeniedHttpExceptionConverter implements ExceptionToProblemConverterI
 {
     public function convert(\Throwable $exception): ?Problem
     {
-        if (!$exception instanceof AccessDeniedHttpException) {
-            return null;
+        if ($exception instanceof AccessDeniedHttpException) {
+            return new Problem(
+                'Access Denied error: Forbidden',
+                Response::HTTP_FORBIDDEN,
+                'forbidden'
+            );
         }
 
-        return new Problem(
-            'Access denied http error',
-            Response::HTTP_FORBIDDEN,
-            'access_denied_http'
-        );
+        return null;
     }
 }
