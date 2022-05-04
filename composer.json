@@ -1,31 +1,31 @@
 {
     "name": "visual-craft/rest-base-bundle",
-    "license": "MIT",
     "type": "symfony-bundle",
     "description": "Symfony Bundle which provides base foundation for REST API applications",
+    "license": "MIT",
     "require": {
         "php": ">=7.4",
-        "symfony/framework-bundle": "^5.4|^6.0",
-        "symfony/serializer": "^5.4|^6.0",
-        "symfony/validator": "^5.4|^6.0",
-        "symfony/property-access": "^5.4|^6.0",
-        "symfony/property-info": "^5.4|^6.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.4",
-        "symfony/security-bundle": "^5.4|^6.0",
-        "symfony/yaml": "^5.4|^6.0",
-        "doctrine/annotations": "^1.13"
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/property-access": "^5.4 || ^6.0",
+        "symfony/property-info": "^5.4 || ^6.0",
+        "symfony/security-bundle": "^5.4 || ^6.0",
+        "symfony/serializer": "^5.4 || ^6.0",
+        "symfony/validator": "^5.4 || ^6.0",
+        "symfony/yaml": "^5.4 || ^6.0"
     },
     "require-dev": {
-        "psr/log": "^1.0|^2.0|^3.0",
-        "symfony/phpunit-bridge": "^5.4|^6.0",
-        "symfony/browser-kit": "^5.4|^6.0",
         "ext-json": "*",
+        "doctrine/annotations": "^1.13",
         "matthiasnoback/symfony-config-test": "^4.3",
-        "visual-craft/php-cs-fixer-config": "^0.2.0",
+        "psalm/plugin-phpunit": "^0.16.1",
         "psalm/plugin-symfony": "^3.1",
+        "psr/log": "^1.0 || ^2.0 || ^3.0",
+        "symfony/browser-kit": "^5.4 || ^6.0",
+        "symfony/phpunit-bridge": "^5.4 || ^6.0",
         "vimeo/psalm": "^4.22",
-        "psalm/plugin-phpunit": "^0.16.1"
+        "visual-craft/php-cs-fixer-config": "^0.2.0"
     },
     "autoload": {
         "psr-4": {
