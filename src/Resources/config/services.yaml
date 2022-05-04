@@ -12,6 +12,7 @@ services:
     VisualCraft\RestBaseBundle\Request\ApiZoneRequestMatcher: ~
     VisualCraft\RestBaseBundle\Request\RequestBodyDeserializer: ~
     VisualCraft\RestBaseBundle\Response\ResponseBuilderFactory: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\AccessDeniedHttpExceptionConverter: ~
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\AuthenticationExceptionConverter: ~
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\HttpExceptionInterfaceConverter: ~
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InsufficientAuthenticationExceptionConverter: ~

@@ -31,6 +31,12 @@ return static function (ContainerConfigurator $container): void {
                 'log_level' => 'error',
             ],
         ],
+        'session' => [
+            'handler_id' => null,
+            'cookie_secure' => 'auto',
+            'cookie_samesite' => 'lax',
+            'storage_factory_id' => 'session.storage.factory.mock_file',
+        ],
     ];
 
     $container->extension('framework', $configuration);

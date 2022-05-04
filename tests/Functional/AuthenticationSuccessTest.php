@@ -29,6 +29,6 @@ class AuthenticationSuccessTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
-        $this->assertJsonStringEqualsJsonString('{"login_status": "success"}', $response->getContent());
+        $this->assertJsonStringEqualsJsonString('{"user": "user1"}', $response->getContent());
     }
 }

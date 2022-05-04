@@ -11,8 +11,10 @@ class LoginController extends AbstractController
 {
     public function __invoke(): JsonResponse
     {
+        $user = $this->getUser();
+
         return $this->json([
-            'login_status' => 'success',
+            'user' => $user ? $user->getUserIdentifier() : null,
         ]);
     }
 }
