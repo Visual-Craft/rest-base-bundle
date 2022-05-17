@@ -77,12 +77,84 @@ visual_craft_rest_base:
 ### Supported exceptions
 Supported by default exceptions list:
 - AuthenticationException
+
+response body:
+```php
+[
+    'title' => 'Authentication error: An authentication exception occurred.', 
+    'statusCode' => 401, 
+    'type' => 'authentication_error', 
+]
+```
 - HttpExceptionInterface
+
+response body:
+```php
+[
+    'title' => 'HTTP error: Not Found', 
+    'statusCode' => 404, 
+    'type' => 'http_error', 
+]
+```
 - InsufficientAuthenticationException
+
+response body:
+```php
+[
+    'title' => 'Insufficient authentication error: Not privileged to request the resource.', 
+    'statusCode' => 401, 
+    'type' => 'insufficient_authentication_error', 
+]
+```
 - InvalidRequestBodyFormatException
+
+response body:
+```php
+[
+    'title' => 'Invalid request body format', 
+    'statusCode' => 400, 
+    'type' => 'invalid_request_body_format', 
+    'details' => [
+        'cause': 'unexpected_value'
+    ]    
+]
+```
 - InvalidRequestContentTypeException
+
+response body:
+```php
+[
+    'title' => 'Invalid request content type', 
+    'statusCode' => 400, 
+    'type' => 'invalid_request_content_type', 
+    'details' => [
+        'code': 'unsupported'
+    ]    
+]
+```
 - InvalidRequestException
+
+response body:
+```php
+[
+    'title' => 'Invalid request', 
+    'statusCode' => 400, 
+    'type' => 'invalid_request', 
+]
+```
 - ValidationErrorException
+
+response body:
+```php
+[
+    'title' => 'Validation error', 
+    'statusCode' => 400, 
+    'type' => 'validation_error', 
+    'details' => [
+        'violations' => 'Invalid customField'
+    ]
+]
+```
 
 ### Enable support security exceptions
 - php
@@ -270,7 +342,6 @@ To enable exception stack trace in error response body needed to change config:
 - php
 ```php
 <?php
-// app/config/packages/rest-base.php
 
 declare(strict_types=1);
 
