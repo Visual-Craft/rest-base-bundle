@@ -1,8 +1,9 @@
 RestBase Bundle
 ===============
 
-Symfony Bundle which provides base foundation for REST API applications
-
+Symfony Bundle which provides base foundation for REST API applications. Features include:
+- Exceptions and errors converter to response
+- RESTful decoding of HTTP request body and Accept headers
 
 Installation
 ------------
@@ -12,6 +13,8 @@ Installation
     $ composer require visual-craft/rest-base-bundle
 
 ### Step 2: Enable the bundle
+If you are not using Flex, you also have to enable the bundle by adding the following line in the app/AppKernel.php:
+
 ```php
 <?php
 // app/AppKernel.php
@@ -31,7 +34,47 @@ class AppKernel extends Kernel
     }
 }
 ```
-### Step 3: Security configuration
+Errors
+-----
+### Configuration
+Using the zone configuration, you can specify part of application where error converting enabled. 
+
+Example:
+```php
+<?php
+// app/config/packages/rest-base.php
+
+declare(strict_types=1);
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+return static function (ContainerConfigurator $container): void {
+    $configuration = [
+        'zone' => [
+            [
+                'path' => '^/api/',
+                'host' => null,
+                'methods' => [],
+                'ips' => [],
+            ],
+        ],
+    ];
+
+    $container->extension('visual_craft_rest_base', $configuration);
+};
+```
+
+### Supported exceptions
+Supported by default exceptions list:
+- AuthenticationException
+- HttpExceptionInterface
+- InsufficientAuthenticationException
+- InvalidRequestBodyFormatException
+- InvalidRequestContentTypeException
+- InvalidRequestException
+- ValidationErrorException
+
+### Enable support security exceptions
 ```php
 <?php
 // app/config/packages/security.php
@@ -48,10 +91,107 @@ class AppKernel extends Kernel
 ],
 //..
 ```
-Usage
------
 
-### Deserializer
+### Support custom exception
+You can create and add your own exceptions and convertors for them.
+
+- create your exception
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Exceptions;
+
+
+use Throwable;class CustomException extends \RuntimeException
+{
+    private string $customField;
+    
+    public function __construct(string $customField, $message = "",$code = 0,Throwable $previous = null)
+    {
+        parent::__construct($message,$code,$previous);
+        $this->customField = $customField;
+    }
+    
+    public function getCustomField(): string
+    {
+        return $this->customField;
+    }
+}
+```
+
+- create converter
+```php
+<?php
+//app/src/Problem/ExceptionToProblemConverters/InvalidRequestBodyFormatExceptionConverter.php
+
+declare(strict_types=1);
+
+namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
+
+use Symfony\Component\HttpFoundation\Response;
+use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
+use VisualCraft\RestBaseBundle\Problem\Problem;
+
+class CustomExceptionConverter implements ExceptionToProblemConverterInterface
+{
+    public function convert(\Throwable $exception): ?Problem
+    {
+        if (!$exception instanceof CustomException) {
+            return null;
+        }
+
+        $result = new Problem(
+            'Custom exception title',
+            Response::HTTP_BAD_REQUEST,
+            'custom_exception_type'
+        );
+        $result->addDetails('cause', 'custom exception cause');
+
+        return $result;
+    }
+}
+```
+
+- throw exception
+```php
+<?php
+//app/src/Controller
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+
+class ThrowInvalidRequestExceptionController extends AbstractController
+{
+    public function __invoke(Request $request): void
+    {
+        //..
+        throw new CustomException();
+        //..
+    }
+}
+```
+
+- response body
+```php
+[
+    'title' => 'Custom exception title', 
+    'statusCode' => 400, 
+    'type' => 'custom_exception_type', 
+    'details' => [
+        'cause' => 'custom exception cause',
+    ]
+]
+```
+
+### Request Body Deserializer
+Api Body Deserializer contains:
+- detect deserialization format
+- deserialize using symfony/serializer and handle exceptions
+- validate using symfony/validator with violations converting
+
+Example:
 ```php
 <?php
 // app/src/Controller/ProcessRequestController.php
@@ -63,10 +203,7 @@ use VisualCraft\RestBaseBundle\Request\RequestBodyDeserializer;
 
 class ProcessRequestController extends AbstractController
 {
-    /**
-     * @var RequestBodyDeserializer
-     */
-    private $deserializer;
+    private RequestBodyDeserializer $deserializer;
 
     public function __construct(RequestBodyDeserializer $deserializer)
     {
@@ -78,19 +215,10 @@ class ProcessRequestController extends AbstractController
         //..
         $testDto = $this->deserializer->deserialize($request, Dto::class);
         //..
-        return new Response('');
     }
 }
 ```
-
-Request requirements:
-
-method: POST
-
-content type: 'application/json' or another configured type
-
-###Content type configuration
-
+####Content type configuration
 ```php
 <?php
 // app/config/packages/rest-base.php
@@ -110,63 +238,37 @@ return static function (ContainerConfigurator $container): void {
     $container->extension('visual_craft_rest_base', $configuration);
 };
 ```
-### Problems converting
-Any exceptions can be converted to object for return to easier debugging. 
-You can create and add your own convertors.
-
-Example:
+### Debug
+To enable exception stack trace in error response body needed to change config:
 ```php
 <?php
-//app/src/Problem/ExceptionToProblemConverters/InvalidRequestBodyFormatExceptionConverter.php
+// app/config/packages/rest-base.php
 
 declare(strict_types=1);
 
-namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\Exception\ExtraAttributesException;
-use Symfony\Component\Serializer\Exception\UnexpectedValueException;
-use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException;
-use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
-use VisualCraft\RestBaseBundle\Problem\Problem;
+return static function (ContainerConfigurator $container): void {
+    $configuration = [
+        'debug' => true,
+    ];
 
-class InvalidRequestBodyFormatExceptionConverter implements ExceptionToProblemConverterInterface
-{
-    public function convert(\Throwable $exception): ?Problem
-    {
-        if (!$exception instanceof InvalidRequestBodyFormatException) {
-            return null;
-        }
-
-        $result = new Problem(
-            'Invalid request body format',
-            Response::HTTP_BAD_REQUEST,
-            'invalid_request_body_format'
-        );
-        $cause = 'invalid_format';
-
-        if (($previousException = $exception->getPrevious()) !== null) {
-            if ($previousException instanceof UnexpectedValueException) {
-                $cause = 'unexpected_value';
-            } elseif ($previousException instanceof ExtraAttributesException) {
-                $cause = 'extra_attributes';
-            }
-        }
-
-        $result->addDetails('cause', $cause);
-
-        return $result;
-    }
-}
+    $container->extension('visual_craft_rest_base', $configuration);
+};
 ```
+
 ### Failing Validator
-Rest base bundle also contained FailingValidator class which can help you validate your data objects:
+Rest base bundle also contained FailingValidator class which can help you validate your data objects with converting violations :
 ```php
 <?php
+// app/src/Controller/ProcessRequestController.php
 
-//..
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use VisualCraft\RestBaseBundle\Request\RequestBodyDeserializer;
 
-class dataManagerClass
+class ProcessRequestController extends AbstractController
 {
     private FailingValidator $validator;
 
@@ -176,11 +278,11 @@ class dataManagerClass
         $this->validator = $validator;
     }
 
-    public function validateData(Dto $data)
+    public function __invoke(Request $request): Response
     {
+        //..
         $this->validator->validate($data);
-
-        return $data;
+        //..
     }
 }
 ```
@@ -188,8 +290,16 @@ class dataManagerClass
 Tests
 -----
 ```sh
-$ composer install
+$ vendor/bin/simple-phpunit install
 $ vendor/bin/phpunit
+```
+
+Additional Tools
+-----
+```sh
+$ composer install
+$ vendor/bin/psalm
+$ vendor/bin/php-cs-fixer fix
 ```
 
 License
