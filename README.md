@@ -40,6 +40,7 @@ Errors
 Using the zone configuration, you can specify part of application where error converting enabled. 
 
 Example:
+- php
 ```php
 <?php
 // app/config/packages/rest-base.php
@@ -63,6 +64,15 @@ return static function (ContainerConfigurator $container): void {
     $container->extension('visual_craft_rest_base', $configuration);
 };
 ```
+- yaml
+```yaml
+visual_craft_rest_base:
+    zone:
+        path: '^/api/'
+        host: null
+        methods: []
+        ips: []
+```
 
 ### Supported exceptions
 Supported by default exceptions list:
@@ -75,6 +85,7 @@ Supported by default exceptions list:
 - ValidationErrorException
 
 ### Enable support security exceptions
+- php
 ```php
 <?php
 // app/config/packages/security.php
@@ -91,7 +102,14 @@ Supported by default exceptions list:
 ],
 //..
 ```
-
+- yaml
+```yaml
+security:
+    firewalls:
+        main:
+            entry_point: 'VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint'
+            //..
+```
 ### Support custom exception
 You can create and add your own exceptions and convertors for them.
 
@@ -219,6 +237,7 @@ class ProcessRequestController extends AbstractController
 }
 ```
 ####Content type configuration
+- php
 ```php
 <?php
 // app/config/packages/rest-base.php
@@ -238,8 +257,17 @@ return static function (ContainerConfigurator $container): void {
     $container->extension('visual_craft_rest_base', $configuration);
 };
 ```
+- yaml
+```yaml
+visual_craft_rest_base:
+    mimeTypes:
+        json: 'application/json'
+        //..
+```
+
 ### Debug
 To enable exception stack trace in error response body needed to change config:
+- php
 ```php
 <?php
 // app/config/packages/rest-base.php
@@ -255,6 +283,11 @@ return static function (ContainerConfigurator $container): void {
 
     $container->extension('visual_craft_rest_base', $configuration);
 };
+```
+- yaml
+```yaml
+visual_craft_rest_base:
+    debug: true
 ```
 
 ### Failing Validator
