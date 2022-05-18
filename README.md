@@ -17,7 +17,7 @@ If you are not using Flex, you also have to enable the bundle by adding the foll
 
 ```php
 <?php
-// app/AppKernel.php
+// AppKernel.php
 
 // ...
 use VisualCraft\RestBaseBundle\VisualCraftRestBaseBundle;
@@ -40,32 +40,8 @@ Errors
 Using the zone configuration, you can specify part of application where error converting enabled. 
 
 Example:
-- php
-```php
-<?php
-// app/config/packages/rest-base.php
-
-declare(strict_types=1);
-
-namespace Symfony\Component\DependencyInjection\Loader\Configurator;
-
-return static function (ContainerConfigurator $container): void {
-    $configuration = [
-        'zone' => [
-            [
-                'path' => '^/api/',
-                'host' => null,
-                'methods' => [],
-                'ips' => [],
-            ],
-        ],
-    ];
-
-    $container->extension('visual_craft_rest_base', $configuration);
-};
-```
-- yaml
 ```yaml
+#config/packages/rest-base.php
 visual_craft_rest_base:
     zone:
         path: '^/api/'
@@ -78,104 +54,112 @@ visual_craft_rest_base:
 Supported by default exceptions list:
 - AuthenticationException
 
-response body:
-```php
-[
-    'title' => 'Authentication error: An authentication exception occurred.', 
-    'statusCode' => 401, 
-    'type' => 'authentication_error', 
-]
+All authentication exceptions.
+
+Response body:
+```json
+{
+  "title": "Authentication error: An authentication exception occurred.",
+  "statusCode": 401,
+  "type": "authentication_error"
+}
 ```
 - HttpExceptionInterface
 
-response body:
-```php
-[
-    'title' => 'HTTP error: Not Found', 
-    'statusCode' => 404, 
-    'type' => 'http_error', 
-]
+HTTP error exceptions.
+
+Response body:
+```json
+{
+  "title": "HTTP error: Not Found",
+  "statusCode": 404,
+  "type": "http_error"
+}
 ```
 - InsufficientAuthenticationException
 
-response body:
-```php
-[
-    'title' => 'Insufficient authentication error: Not privileged to request the resource.', 
-    'statusCode' => 401, 
-    'type' => 'insufficient_authentication_error', 
-]
+InsufficientAuthenticationException is thrown if the user credentials are not sufficiently trusted.
+This is the case when a user is anonymous and the resource to be displayed has an access role.
+
+Response body:
+```json
+{
+  "title": "Insufficient authentication error: Not privileged to request the resource.",
+  "statusCode": 401,
+  "type": "insufficient_authentication_error"
+}
 ```
 - InvalidRequestBodyFormatException
 
-response body:
-```php
-[
-    'title' => 'Invalid request body format', 
-    'statusCode' => 400, 
-    'type' => 'invalid_request_body_format', 
-    'details' => [
-        'cause': 'unexpected_value'
-    ]    
-]
+Thrown when symfony/serializer can't deserialize data because of invalid data fields values or if request body have 
+extra attributes to deserialize.
+
+Response body:
+```json
+{
+  "title": "Invalid request body format",
+  "statusCode": 400,
+  "type": "invalid_request_body_format",
+  "details": {
+    "cause": "unexpected_value"
+  }
+}
 ```
+    "cause" field values:
+    - "unexpected_value" thrown if data fields have invalid values
+    - "extra_attributes" thrown if request body have extra attributes
+
 - InvalidRequestContentTypeException
 
-response body:
-```php
-[
-    'title' => 'Invalid request content type', 
-    'statusCode' => 400, 
-    'type' => 'invalid_request_content_type', 
-    'details' => [
-        'code': 'unsupported'
-    ]    
-]
+Thrown when no content type parameter are not pointed or content type have unsupported value.
+
+Response body:
+```json
+{
+  "title": "Invalid request content type",
+  "statusCode": 400,
+  "type": "invalid_request_content_type",
+  "details": {
+    "code": "unsupported",
+    "valid_content_types": {valid content types list}
+  }
+}
 ```
+    "code" field values:
+
+    "missing" : if content type are not pointed
+
+    "unsupported" : if content have unsupported value
+
 - InvalidRequestException
 
-response body:
-```php
-[
-    'title' => 'Invalid request', 
-    'statusCode' => 400, 
-    'type' => 'invalid_request', 
-]
+General exception thrown if request body are invalid.
+
+Response body:
+```json
+{
+  "title": "Invalid request",
+  "statusCode": 400,
+  "type": "invalid_request"
+}
 ```
 - ValidationErrorException
 
 response body:
-```php
-[
-    'title' => 'Validation error', 
-    'statusCode' => 400, 
-    'type' => 'validation_error', 
-    'details' => [
-        'violations' => 'Invalid customField'
-    ]
-]
+```json
+{
+  "title": "Validation error",
+  "statusCode": 400,
+  "type": "validation_error",
+  "details": {
+    "violations": {symfony/serializer validator ViolationList}
+  }
+}
 ```
 
 ### Enable support security exceptions
-- php
-```php
-<?php
-// app/config/packages/security.php
-
-//..
-'firewalls' => [
-    //..
-    'main' => [
-        //..
-        'entry_point' => 'VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint',
-        //..
-    ],
-    //..
-],
-//..
-```
-- yaml
 ```yaml
+#config/packages/security.php
 security:
     firewalls:
         main:
@@ -193,8 +177,9 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
+use Throwable;
 
-use Throwable;class CustomException extends \RuntimeException
+class CustomException extends \RuntimeException
 {
     private string $customField;
     
@@ -211,10 +196,17 @@ use Throwable;class CustomException extends \RuntimeException
 }
 ```
 
+- register your exception
+```yaml
+#config/services.yaml
+services:
+    App\Exceptions\CustomException: ~
+```
+    Note: If you're using the default services.yaml configuration, Symfony will automatically know about your new service.
 - create converter
 ```php
 <?php
-//app/src/Problem/ExceptionToProblemConverters/InvalidRequestBodyFormatExceptionConverter.php
+//src/Problem/ExceptionToProblemConverters/InvalidRequestBodyFormatExceptionConverter.php
 
 declare(strict_types=1);
 
@@ -247,7 +239,7 @@ class CustomExceptionConverter implements ExceptionToProblemConverterInterface
 - throw exception
 ```php
 <?php
-//app/src/Controller
+//src/Controller
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -277,14 +269,14 @@ class ThrowInvalidRequestExceptionController extends AbstractController
 
 ### Request Body Deserializer
 Api Body Deserializer contains:
-- detect deserialization format
+- detect and check deserialization format
 - deserialize using symfony/serializer and handle exceptions
 - validate using symfony/validator with violations converting
 
 Example:
 ```php
 <?php
-// app/src/Controller/ProcessRequestController.php
+// src/Controller/ProcessRequestController.php
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -309,28 +301,8 @@ class ProcessRequestController extends AbstractController
 }
 ```
 ####Content type configuration
-- php
-```php
-<?php
-// app/config/packages/rest-base.php
-
-declare(strict_types=1);
-
-namespace Symfony\Component\DependencyInjection\Loader\Configurator;
-
-return static function (ContainerConfigurator $container): void {
-    $configuration = [
-        'mimeTypes' => [
-            'json' => 'application/json',
-            //..
-        ],
-    ];
-
-    $container->extension('visual_craft_rest_base', $configuration);
-};
-```
-- yaml
 ```yaml
+#config/packages/rest-base.php
 visual_craft_rest_base:
     mimeTypes:
         json: 'application/json'
@@ -339,33 +311,29 @@ visual_craft_rest_base:
 
 ### Debug
 To enable exception stack trace in error response body needed to change config:
-- php
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace Symfony\Component\DependencyInjection\Loader\Configurator;
-
-return static function (ContainerConfigurator $container): void {
-    $configuration = [
-        'debug' => true,
-    ];
-
-    $container->extension('visual_craft_rest_base', $configuration);
-};
-```
-- yaml
 ```yaml
+#config/packages/rest-base.php
 visual_craft_rest_base:
     debug: true
 ```
+Error response stack trace example:
+```json
+{
+    ....
+    "details": {
+        "class": "Namespace\\ExceptionClass",
+        "message": "Exception message",
+        "stack_trace": "Stack trace as a string"
+    
+}
+```
+
 
 ### Failing Validator
 Rest base bundle also contained FailingValidator class which can help you validate your data objects with converting violations :
 ```php
 <?php
-// app/src/Controller/ProcessRequestController.php
+// src/Controller/ProcessRequestController.php
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -402,8 +370,8 @@ Additional Tools
 -----
 ```sh
 $ composer install
-$ vendor/bin/psalm
 $ vendor/bin/php-cs-fixer fix
+$ vendor/bin/psalm
 ```
 
 License
