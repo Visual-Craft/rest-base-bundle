@@ -61,7 +61,8 @@ Response body:
 {
   "title": "Authentication error: An authentication exception occurred.",
   "statusCode": 401,
-  "type": "authentication_error"
+  "type": "authentication_error", 
+  "details": []
 }
 ```
 - HttpExceptionInterface
@@ -73,7 +74,8 @@ Response body:
 {
   "title": "HTTP error: Not Found",
   "statusCode": 404,
-  "type": "http_error"
+  "type": "http_error", 
+  "details": []
 }
 ```
 - InsufficientAuthenticationException
@@ -86,13 +88,13 @@ Response body:
 {
   "title": "Insufficient authentication error: Not privileged to request the resource.",
   "statusCode": 401,
-  "type": "insufficient_authentication_error"
+  "type": "insufficient_authentication_error", 
+  "details": []
 }
 ```
 - InvalidRequestBodyFormatException
 
-Thrown when symfony/serializer can't deserialize data because of invalid data fields values or if request body have 
-extra attributes to deserialize.
+Thrown when symfony/serializer can't deserialize request body.
 
 Response body:
 ```json
@@ -106,8 +108,8 @@ Response body:
 }
 ```
     "cause" field values:
-    - "unexpected_value" thrown if data fields have invalid values
-    - "extra_attributes" thrown if request body have extra attributes
+    - "unexpected_value" if data fields have invalid values
+    - "extra_attributes" if request body have extra attributes
 
 - InvalidRequestContentTypeException
 
@@ -121,7 +123,7 @@ Response body:
   "type": "invalid_request_content_type",
   "details": {
     "code": "unsupported",
-    "valid_content_types": {valid content types list}
+    "valid_content_types": ["aplication/json'"]
   }
 }
 ```
@@ -140,7 +142,8 @@ Response body:
 {
   "title": "Invalid request",
   "statusCode": 400,
-  "type": "invalid_request"
+  "type": "invalid_request", 
+  "details": []
 }
 ```
 - ValidationErrorException
@@ -152,7 +155,7 @@ response body:
   "statusCode": 400,
   "type": "validation_error",
   "details": {
-    "violations": {symfony/serializer validator ViolationList}
+    "violations": {serialized by symfony/serializer ConstraintViolationList}
   }
 }
 ```
@@ -195,14 +198,6 @@ class CustomException extends \RuntimeException
     }
 }
 ```
-
-- register your exception
-```yaml
-#config/services.yaml
-services:
-    App\Exceptions\CustomException: ~
-```
-    Note: If you're using the default services.yaml configuration, Symfony will automatically know about your new service.
 - create converter
 ```php
 <?php
@@ -235,7 +230,8 @@ class CustomExceptionConverter implements ExceptionToProblemConverterInterface
     }
 }
 ```
-
+    Note: Register your class as a service and tag it with visual_craft.rest_base.exception_to_problem_converter. 
+    If you're using the default services.yaml configuration, Symfony will automatically know about your new service.
 - throw exception
 ```php
 <?php
@@ -256,15 +252,15 @@ class ThrowInvalidRequestExceptionController extends AbstractController
 ```
 
 - response body
-```php
-[
-    'title' => 'Custom exception title', 
-    'statusCode' => 400, 
-    'type' => 'custom_exception_type', 
-    'details' => [
-        'cause' => 'custom exception cause',
-    ]
-]
+```json
+{
+    "title" : "Custom exception title",
+    "statusCode" : 400,
+    "type" : "custom_exception_type",
+    "details" : {
+        "cause" : "custom exception cause"
+    }
+}
 ```
 
 ### Request Body Deserializer
@@ -324,6 +320,7 @@ Error response stack trace example:
         "class": "Namespace\\ExceptionClass",
         "message": "Exception message",
         "stack_trace": "Stack trace as a string"
+    }
     
 }
 ```
