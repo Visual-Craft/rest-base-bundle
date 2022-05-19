@@ -203,40 +203,40 @@ You can create and add your own exceptions and convertors for them.
         }
     }
     ```
-  * create converter
-      ```php
-      <?php
-      //src/Problem/ExceptionToProblemConverters/InvalidRequestBodyFormatExceptionConverter.php
+* create converter
+    ```php
+    <?php
+    //src/Problem/ExceptionToProblemConverters/InvalidRequestBodyFormatExceptionConverter.php
     
-      declare(strict_types=1);
+    declare(strict_types=1);
     
-      namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
+    namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
     
-      use Symfony\Component\HttpFoundation\Response;
-      use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
-      use VisualCraft\RestBaseBundle\Problem\Problem;
+    use Symfony\Component\HttpFoundation\Response;
+    use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
+    use VisualCraft\RestBaseBundle\Problem\Problem;
     
-      class CustomExceptionConverter implements ExceptionToProblemConverterInterface
-      {
-          public function convert(\Throwable $exception): ?Problem
-          {
-              if (!$exception instanceof CustomException) {
-                  return null;
-              }
+    class CustomExceptionConverter implements ExceptionToProblemConverterInterface
+    {
+        public function convert(\Throwable $exception): ?Problem
+        {
+            if (!$exception instanceof CustomException) {
+                return null;
+            }
     
-              $result = new Problem(
-                  'Custom exception title',
-                  Response::HTTP_BAD_REQUEST,
-                  'custom_exception_type'
-              );
-              $result->addDetails('cause', 'custom exception cause');
+            $result = new Problem(
+                'Custom exception title',
+                Response::HTTP_BAD_REQUEST,
+                'custom_exception_type'
+            );
+            $result->addDetails('cause', 'custom exception cause');
     
-              return $result;
-          }
-      }
-      ```
-        Note: Register your class as a service and tag it with visual_craft.rest_base.exception_to_problem_converter. 
-        If you're using the default services.yaml configuration, Symfony will automatically know about your new service.
+            return $result;
+        }
+    }
+    ```
+      Note: Register your class as a service and tag it with visual_craft.rest_base.exception_to_problem_converter. 
+      If you're using the default services.yaml configuration, Symfony will automatically know about your new service.
 
 * throw exception
     ```php
