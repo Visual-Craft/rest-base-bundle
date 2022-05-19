@@ -166,6 +166,7 @@ response body:
 ```
 ----
 ### Enable support security exceptions
+If you use separate firewall for your API, use `VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint`
 ```yaml
 #config/packages/security.php
 security:
@@ -173,6 +174,35 @@ security:
         main:
             entry_point: 'VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint'
             //..
+```
+If you want to use your custom entry point class, please edit your class next way:
+``` php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Security;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use VisualCraft\RestBaseBundle\Constants;
+
+class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
+{
+    public function start(Request $request, AuthenticationException $authException = null): Response
+    {
+        if ($request->attributes->get(Constants::API_ZONE_ATTRIBUTE)) {
+            if ($authException) {
+                throw $authException;
+            }
+
+            throw new AuthenticationException('Authentication required');
+        }
+        // Not API zone handle
+    }
+}
 ```
 ### Support custom exception
 You can create and add your own exceptions and convertors for them.
