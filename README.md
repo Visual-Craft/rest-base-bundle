@@ -2,8 +2,8 @@ RestBase Bundle
 ===============
 
 Symfony Bundle which provides base foundation for REST API applications. Features include:
-- Exceptions and errors converter to response
-- RESTful decoding of HTTP request body and Accept headers
+* Exceptions and errors converter to response
+* RESTful decoding of HTTP request body and Accept headers
 
 Installation
 ------------
@@ -52,114 +52,118 @@ visual_craft_rest_base:
 
 ### Supported exceptions
 Supported by default exceptions list:
-- AuthenticationException
+* Symfony\Component\Security\Core\Exception\AuthenticationException
 
-All authentication exceptions.
+    All authentication exceptions.
+    
+    Response body:
+    ```json
+    {
+      "title": "Authentication error: An authentication exception occurred.",
+      "statusCode": 401,
+      "type": "authentication_error", 
+      "details": []
+    }
+    ```
+----
+* Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
 
-Response body:
-```json
-{
-  "title": "Authentication error: An authentication exception occurred.",
-  "statusCode": 401,
-  "type": "authentication_error", 
-  "details": []
-}
-```
-- HttpExceptionInterface
+    HTTP error exceptions.
+    
+    Response body:
+    ```json
+    {
+      "title": "HTTP error: Not Found",
+      "statusCode": 404,
+      "type": "http_error", 
+      "details": []
+    }
+    ```
+----
+* VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InsufficientAuthenticationException
+ 
+    Thrown if the user credentials are not sufficiently trusted.
+    This is the case when a user is anonymous and the resource to be displayed has an access role.
+    
+    Response body:
+    ```json
+    {
+      "title": "Insufficient authentication error: Not privileged to request the resource.",
+      "statusCode": 401,
+      "type": "insufficient_authentication_error", 
+      "details": []
+    }
+    ```
+----
+* VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException
 
-HTTP error exceptions.
-
-Response body:
-```json
-{
-  "title": "HTTP error: Not Found",
-  "statusCode": 404,
-  "type": "http_error", 
-  "details": []
-}
-```
-- InsufficientAuthenticationException
-
-InsufficientAuthenticationException is thrown if the user credentials are not sufficiently trusted.
-This is the case when a user is anonymous and the resource to be displayed has an access role.
-
-Response body:
-```json
-{
-  "title": "Insufficient authentication error: Not privileged to request the resource.",
-  "statusCode": 401,
-  "type": "insufficient_authentication_error", 
-  "details": []
-}
-```
-- InvalidRequestBodyFormatException
-
-Thrown when symfony/serializer can't deserialize request body.
-
-Response body:
-```json
-{
-  "title": "Invalid request body format",
-  "statusCode": 400,
-  "type": "invalid_request_body_format",
-  "details": {
-    "cause": "unexpected_value"
-  }
-}
-```
+    Base exception thrown if request body are invalid.
+    
+    Response body:
+    ```json
+    {
+      "title": "Invalid request",
+      "statusCode": 400,
+      "type": "invalid_request", 
+      "details": []
+    }
+    ```
+----
+* VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException
+    
+    Extends from InvalidRequestException.
+    Thrown when symfony/serializer can't deserialize request body.
+    
+    Response body:
+    ```json
+    {
+      "title": "Invalid request body format",
+      "statusCode": 400,
+      "type": "invalid_request_body_format",
+      "details": {
+        "cause": "unexpected_value"
+      }
+    }
+    ```
     "cause" field values:
-    - "unexpected_value" if data fields have invalid values
-    - "extra_attributes" if request body have extra attributes
+    * "unexpected_value" if data fields have invalid values
+    * "extra_attributes" if request body have extra attributes
+----
+* VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException
 
-- InvalidRequestContentTypeException
-
-Thrown when no content type parameter are not pointed or content type have unsupported value.
-
-Response body:
-```json
-{
-  "title": "Invalid request content type",
-  "statusCode": 400,
-  "type": "invalid_request_content_type",
-  "details": {
-    "code": "unsupported",
-    "valid_content_types": ["aplication/json'"]
-  }
-}
-```
+    Extends from InvalidRequestException.
+    Thrown when no content type parameter are not pointed or content type have unsupported value.
+    
+    Response body:
+    ```json
+    {
+      "title": "Invalid request content type",
+      "statusCode": 400,
+      "type": "invalid_request_content_type",
+      "details": {
+        "code": "unsupported",
+        "valid_content_types": ["aplication/json'"]
+      }
+    }
+    ```
     "code" field values:
+    * "missing" : if content type are not pointed
+    * "unsupported" : if content have unsupported value
+----
+* VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException
 
-    "missing" : if content type are not pointed
-
-    "unsupported" : if content have unsupported value
-
-- InvalidRequestException
-
-General exception thrown if request body are invalid.
-
-Response body:
-```json
-{
-  "title": "Invalid request",
-  "statusCode": 400,
-  "type": "invalid_request", 
-  "details": []
-}
-```
-- ValidationErrorException
-
-response body:
-```json
-{
-  "title": "Validation error",
-  "statusCode": 400,
-  "type": "validation_error",
-  "details": {
-    "violations": {serialized by symfony/serializer ConstraintViolationList}
-  }
-}
-```
-
+    response body:
+    ```json
+    {
+      "title": "Validation error",
+      "statusCode": 400,
+      "type": "validation_error",
+      "details": {
+        "violations": {serialized by symfony/serializer ConstraintViolationList}
+      }
+    }
+    ```
+----
 ### Enable support security exceptions
 ```yaml
 #config/packages/security.php
@@ -172,102 +176,103 @@ security:
 ### Support custom exception
 You can create and add your own exceptions and convertors for them.
 
-- create your exception
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace App\Exceptions;
-
-use Throwable;
-
-class CustomException extends \RuntimeException
-{
-    private string $customField;
+* create your exception
+    ```php
+    <?php
     
-    public function __construct(string $customField, $message = "",$code = 0,Throwable $previous = null)
-    {
-        parent::__construct($message,$code,$previous);
-        $this->customField = $customField;
-    }
+    declare(strict_types=1);
     
-    public function getCustomField(): string
+    namespace App\Exceptions;
+    
+    use Throwable;
+    
+    class CustomException extends \RuntimeException
     {
-        return $this->customField;
-    }
-}
-```
-- create converter
-```php
-<?php
-//src/Problem/ExceptionToProblemConverters/InvalidRequestBodyFormatExceptionConverter.php
-
-declare(strict_types=1);
-
-namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
-
-use Symfony\Component\HttpFoundation\Response;
-use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
-use VisualCraft\RestBaseBundle\Problem\Problem;
-
-class CustomExceptionConverter implements ExceptionToProblemConverterInterface
-{
-    public function convert(\Throwable $exception): ?Problem
-    {
-        if (!$exception instanceof CustomException) {
-            return null;
+        private string $customField;
+        
+        public function __construct(string $customField, $message = "",$code = 0,Throwable $previous = null)
+        {
+            parent::__construct($message,$code,$previous);
+            $this->customField = $customField;
         }
-
-        $result = new Problem(
-            'Custom exception title',
-            Response::HTTP_BAD_REQUEST,
-            'custom_exception_type'
-        );
-        $result->addDetails('cause', 'custom exception cause');
-
-        return $result;
+        
+        public function getCustomField(): string
+        {
+            return $this->customField;
+        }
     }
-}
-```
-    Note: Register your class as a service and tag it with visual_craft.rest_base.exception_to_problem_converter. 
-    If you're using the default services.yaml configuration, Symfony will automatically know about your new service.
-- throw exception
-```php
-<?php
-//src/Controller
+    ```
+  * create converter
+      ```php
+      <?php
+      //src/Problem/ExceptionToProblemConverters/InvalidRequestBodyFormatExceptionConverter.php
+    
+      declare(strict_types=1);
+    
+      namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
+    
+      use Symfony\Component\HttpFoundation\Response;
+      use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
+      use VisualCraft\RestBaseBundle\Problem\Problem;
+    
+      class CustomExceptionConverter implements ExceptionToProblemConverterInterface
+      {
+          public function convert(\Throwable $exception): ?Problem
+          {
+              if (!$exception instanceof CustomException) {
+                  return null;
+              }
+    
+              $result = new Problem(
+                  'Custom exception title',
+                  Response::HTTP_BAD_REQUEST,
+                  'custom_exception_type'
+              );
+              $result->addDetails('cause', 'custom exception cause');
+    
+              return $result;
+          }
+      }
+      ```
+        Note: Register your class as a service and tag it with visual_craft.rest_base.exception_to_problem_converter. 
+        If you're using the default services.yaml configuration, Symfony will automatically know about your new service.
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-
-class ThrowInvalidRequestExceptionController extends AbstractController
-{
-    public function __invoke(Request $request): void
+* throw exception
+    ```php
+    <?php
+    //src/Controller
+    
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Request;
+    
+    class ThrowInvalidRequestExceptionController extends AbstractController
     {
-        //..
-        throw new CustomException();
-        //..
+        public function __invoke(Request $request): void
+        {
+            //..
+            throw new CustomException();
+            //..
+        }
     }
-}
-```
+    ```
 
-- response body
-```json
-{
-    "title" : "Custom exception title",
-    "statusCode" : 400,
-    "type" : "custom_exception_type",
-    "details" : {
-        "cause" : "custom exception cause"
+* response body
+    ```json
+    {
+        "title" : "Custom exception title",
+        "statusCode" : 400,
+        "type" : "custom_exception_type",
+        "details" : {
+            "cause" : "custom exception cause"
+        }
     }
-}
-```
+    ```
 
 ### Request Body Deserializer
 Api Body Deserializer contains:
-- detect and check deserialization format
-- deserialize using symfony/serializer and handle exceptions
-- validate using symfony/validator with violations converting
+* detect and check deserialization format
+* deserialize using symfony/serializer and handle exceptions
+* validate using symfony/validator with violations converting
 
 Example:
 ```php
