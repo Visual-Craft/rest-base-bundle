@@ -177,7 +177,7 @@ security:
 ### Support custom exception
 You can create and add your own exceptions and convertors for them.
 
-* create your exception
+* Create your exception
     ```php
     <?php
     
@@ -203,7 +203,7 @@ You can create and add your own exceptions and convertors for them.
         }
     }
     ```
-* create converter
+* Create converter
     ```php
     <?php
     //src/Problem/ExceptionToProblemConverters/InvalidRequestBodyFormatExceptionConverter.php
@@ -235,10 +235,10 @@ You can create and add your own exceptions and convertors for them.
         }
     }
     ```
-      Note: Register your class as a service and tag it with visual_craft.rest_base.exception_to_problem_converter. 
-      If you're using the default services.yaml configuration, Symfony will automatically know about your new service.
+* Register your class as a service and tag it with `visual_craft.rest_base.exception_to_problem_converter`. 
+If you're using autoconfiguration, Symfony will automatically add this tag.
 
-* throw exception
+* Throw exception
     ```php
     <?php
     //src/Controller
@@ -257,7 +257,7 @@ You can create and add your own exceptions and convertors for them.
     }
     ```
 
-* response body
+* Response body
     ```json
     {
         "title" : "Custom exception title",
