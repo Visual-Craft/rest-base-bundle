@@ -52,7 +52,7 @@ visual_craft_rest_base:
 
 ### Supported exceptions
 Supported by default exceptions list:
-* Symfony\Component\Security\Core\Exception\AuthenticationException
+* #### Symfony\Component\Security\Core\Exception\AuthenticationException
 
     All authentication exceptions.
     
@@ -66,7 +66,7 @@ Supported by default exceptions list:
     }
     ```
 ----
-* Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
+* #### Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
 
     HTTP error exceptions.
     
@@ -80,7 +80,7 @@ Supported by default exceptions list:
     }
     ```
 ----
-* VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InsufficientAuthenticationException
+* #### VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InsufficientAuthenticationException
  
     Thrown if the user credentials are not sufficiently trusted.
     This is the case when a user is anonymous and the resource to be displayed has an access role.
@@ -95,7 +95,7 @@ Supported by default exceptions list:
     }
     ```
 ----
-* VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException
+* #### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException
 
     Base exception thrown if request body are invalid.
     
@@ -109,7 +109,7 @@ Supported by default exceptions list:
     }
     ```
 ----
-* VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException
+* #### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException
     
     Extends from InvalidRequestException.
     Thrown when symfony/serializer can't deserialize request body.
@@ -129,7 +129,7 @@ Supported by default exceptions list:
     * "unexpected_value" if data fields have invalid values
     * "extra_attributes" if request body have extra attributes
 ----
-* VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException
+* #### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException
 
     Extends from InvalidRequestException.
     Thrown when no content type parameter are not pointed or content type have unsupported value.
@@ -150,7 +150,7 @@ Supported by default exceptions list:
     * "missing" : if content type are not pointed
     * "unsupported" : if content have unsupported value
 ----
-* VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException
+* #### VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException
 
     response body:
     ```json
