@@ -52,117 +52,118 @@ visual_craft_rest_base:
 
 ### Supported exceptions
 Supported by default exceptions list:
-* #### Symfony\Component\Security\Core\Exception\AuthenticationException
+#### Symfony\Component\Security\Core\Exception\AuthenticationException
 
-    All authentication exceptions.
-    
-    Response body:
-    ```json
-    {
-      "title": "Authentication error: An authentication exception occurred.",
-      "statusCode": 401,
-      "type": "authentication_error", 
-      "details": []
-    }
-    ```
-----
-* #### Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
+All authentication exceptions.
 
-    HTTP error exceptions.
-    
-    Response body:
-    ```json
-    {
-      "title": "HTTP error: Not Found",
-      "statusCode": 404,
-      "type": "http_error", 
-      "details": []
-    }
-    ```
+Response body:
+```json
+{
+  "title": "Authentication error: An authentication exception occurred.",
+  "statusCode": 401,
+  "type": "authentication_error", 
+  "details": []
+}
+```
 ----
-* #### VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InsufficientAuthenticationException
+#### Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
+
+HTTP error exceptions.
+
+Response body:
+```json
+{
+  "title": "HTTP error: Not Found",
+  "statusCode": 404,
+  "type": "http_error", 
+  "details": []
+}
+```
+----
+#### VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InsufficientAuthenticationException
  
-    Thrown if the user credentials are not sufficiently trusted.
-    This is the case when a user is anonymous and the resource to be displayed has an access role.
-    
-    Response body:
-    ```json
-    {
-      "title": "Insufficient authentication error: Not privileged to request the resource.",
-      "statusCode": 401,
-      "type": "insufficient_authentication_error", 
-      "details": []
-    }
-    ```
-----
-* #### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException
+Thrown if the user credentials are not sufficiently trusted.
+This is the case when a user is anonymous and the resource to be displayed has an access role.
 
-    Base exception thrown if request body are invalid.
-    
-    Response body:
-    ```json
-    {
-      "title": "Invalid request",
-      "statusCode": 400,
-      "type": "invalid_request", 
-      "details": []
-    }
-    ```
+Response body:
+```json
+{
+  "title": "Insufficient authentication error: Not privileged to request the resource.",
+  "statusCode": 401,
+  "type": "insufficient_authentication_error", 
+  "details": []
+}
+```
 ----
-* #### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException
-    
-    Extends from InvalidRequestException.
-    Thrown when symfony/serializer can't deserialize request body.
-    
-    Response body:
-    ```json
-    {
-      "title": "Invalid request body format",
-      "statusCode": 400,
-      "type": "invalid_request_body_format",
-      "details": {
-        "cause": "unexpected_value"
-      }
-    }
-    ```
-    "cause" field values:
-    * "unexpected_value" if data fields have invalid values
-    * "extra_attributes" if request body have extra attributes
-----
-* #### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException
+#### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException
 
-    Extends from InvalidRequestException.
-    Thrown when no content type parameter are not pointed or content type have unsupported value.
-    
-    Response body:
-    ```json
-    {
-      "title": "Invalid request content type",
-      "statusCode": 400,
-      "type": "invalid_request_content_type",
-      "details": {
-        "code": "unsupported",
-        "valid_content_types": ["aplication/json'"]
-      }
-    }
-    ```
-    "code" field values:
-    * "missing" : if content type are not pointed
-    * "unsupported" : if content have unsupported value
-----
-* #### VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException
+Base exception thrown if request body are invalid.
 
-    response body:
-    ```json
-    {
-      "title": "Validation error",
-      "statusCode": 400,
-      "type": "validation_error",
-      "details": {
-        "violations": {serialized by symfony/serializer ConstraintViolationList}
-      }
-    }
-    ```
+Response body:
+```json
+{
+  "title": "Invalid request",
+  "statusCode": 400,
+  "type": "invalid_request", 
+  "details": []
+}
+```
+----
+#### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException
+    
+Extends from InvalidRequestException.
+Thrown when symfony/serializer can't deserialize request body.
+
+Response body:
+```json
+{
+  "title": "Invalid request body format",
+  "statusCode": 400,
+  "type": "invalid_request_body_format",
+  "details": {
+    "cause": "unexpected_value"
+  }
+}
+```
+"cause" field values:
+* "unexpected_value" if data fields have invalid values
+* "extra_attributes" if request body have extra attributes
+----
+#### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException
+
+Extends from InvalidRequestException.
+Thrown when no content type parameter are not pointed or content type have unsupported value.
+
+Response body:
+```json
+{
+  "title": "Invalid request content type",
+  "statusCode": 400,
+  "type": "invalid_request_content_type",
+  "details": {
+    "code": "unsupported",
+    "valid_content_types": ["aplication/json'"]
+  }
+}
+```
+
+"code" field values:
+* "missing" : if content type are not pointed
+* "unsupported" : if content have unsupported value
+----
+#### VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException
+
+response body:
+```json
+{
+  "title": "Validation error",
+  "statusCode": 400,
+  "type": "validation_error",
+  "details": {
+    "violations": {serialized by symfony/serializer ConstraintViolationList}
+  }
+}
+```
 ----
 ### Enable support security exceptions
 ```yaml
