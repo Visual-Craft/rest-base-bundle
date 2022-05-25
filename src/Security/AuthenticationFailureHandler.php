@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace VisualCraft\RestBaseBundle\Tests\TestApplication\Security;
+namespace VisualCraft\RestBaseBundle\Security;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -21,5 +21,6 @@ services:
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InvalidRequestBodyFormatExceptionConverter: ~
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InvalidRequestContentTypeExceptionConverter: ~
     VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint: ~
+    VisualCraft\RestBaseBundle\Security\AuthenticationFailureHandler: ~
     VisualCraft\RestBaseBundle\Serializer\FormatRegistry: ~
     VisualCraft\RestBaseBundle\Validator\FailingValidator: ~
