@@ -197,15 +197,20 @@ use VisualCraft\RestBaseBundle\Constants;
 
 class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
 {
+
+      private ProblemResponseFactory $problemResponseFactory;
+
+    public function __construct(ProblemResponseFactory $problemResponseFactory)
+    {
+        $this->problemResponseFactory = $problemResponseFactory;
+    }
+
     public function start(Request $request, AuthenticationException $authException = null): Response
     {
         if ($request->attributes->get(Constants::API_ZONE_ATTRIBUTE)) {
-            if ($authException) {
-                throw $authException;
-            }
-
-            throw new AuthenticationException('Authentication required');
+             return $this->problemResponseFactory->create($authException ?? new AuthenticationException('Authentication required'));
         }
+
         // Not API zone handle
     }
 }

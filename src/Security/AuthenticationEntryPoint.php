@@ -8,15 +8,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory;
 
 class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
 {
+    private ProblemResponseFactory $problemResponseFactory;
+
+    public function __construct(ProblemResponseFactory $problemResponseFactory)
+    {
+        $this->problemResponseFactory = $problemResponseFactory;
+    }
+
     public function start(Request $request, AuthenticationException $authException = null): Response
     {
-        if ($authException) {
-            throw $authException;
-        }
-
-        throw new AuthenticationException('Authentication required');
+        return $this->problemResponseFactory->create($authException ?? new AuthenticationException('Authentication required'));
     }
 }
