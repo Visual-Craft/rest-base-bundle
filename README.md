@@ -85,7 +85,7 @@ Response body:
 ```
 ----
 #### VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InsufficientAuthenticationException
- 
+
 Thrown if the user credentials are not sufficiently trusted.
 This is the case when a user is anonymous and the resource to be displayed has an access role.
 
@@ -108,13 +108,13 @@ Response body:
 {
   "title": "Invalid request",
   "statusCode": 400,
-  "type": "invalid_request", 
+  "type": "invalid_request",
   "details": []
 }
 ```
 ----
 #### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException
-    
+
 Extends from InvalidRequestException.
 Thrown when symfony/serializer can't deserialize request body.
 
@@ -215,6 +215,18 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
     }
 }
 ```
+
+If you using Authenticator in API, use `VisualCraft\RestBaseBundle\Security\AuthenticationFailureHandler` for auth error converting
+```yaml
+#config/packages/security.php
+security:
+    firewalls:
+        main:
+            json_login:
+                # ....
+                failure_handler: 'VisualCraft\RestBaseBundle\Security\AuthenticationFailureHandler'
+```
+
 ### Support custom exception
 You can create and add your own exceptions and convertors for them.
 
@@ -274,7 +286,7 @@ You can create and add your own exceptions and convertors for them.
         }
     }
     ```
-* Register your class as a service and tag it with `visual_craft.rest_base.exception_to_problem_converter`. 
+* Register your class as a service and tag it with `visual_craft.rest_base.exception_to_problem_converter`.
 If you're using autoconfiguration, Symfony will automatically add this tag.
 
 * Throw exception

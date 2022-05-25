@@ -11,14 +11,14 @@ return static function (ContainerConfigurator $container): void {
         'enable_authenticator_manager' => true,
         'firewalls' => [
             'main' => [
-                'entry_point' => 'VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint',
+                'entry_point' => \VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint::class,
                 'lazy' => true,
                 'provider' => 'users',
                 'json_login' => [
                     'check_path' => '/api/login',
                     'username_path' => 'login',
                     'password_path' => 'password',
-                    'failure_handler' => 'VisualCraft\RestBaseBundle\Tests\TestApplication\Security\AuthenticationFailureHandler',
+                    'failure_handler' => \VisualCraft\RestBaseBundle\Security\AuthenticationFailureHandler::class,
                 ],
             ],
         ],
