@@ -146,7 +146,7 @@ Response body:
   "type": "invalid_request_content_type",
   "details": {
     "code": "unsupported",
-    "valid_content_types": ["aplication/json'"]
+    "valid_content_types": ["application/json'"]
   }
 }
 ```
@@ -216,7 +216,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
 }
 ```
 
-If you using Authenticator in API, use `VisualCraft\RestBaseBundle\Security\AuthenticationFailureHandler` for auth error converting
+If Authenticator is used in API, use `VisualCraft\RestBaseBundle\Security\AuthenticationFailureHandler` for auth error converting
 ```yaml
 #config/packages/security.php
 security:
@@ -353,7 +353,7 @@ class ProcessRequestController extends AbstractController
     }
 }
 ```
-####Content type configuration
+#### Content type configuration
 ```yaml
 #config/packages/rest-base.php
 visual_craft_rest_base:
@@ -373,11 +373,19 @@ visual_craft_rest_base:
 Error response example:
 ```json
 {
-    //....
+    // ....
     "details": {
-        "class": "Namespace\\ExceptionClass",
-        "message": "Exception message",
-        "stack_trace": "Stack trace as a string"
+        "exception": {
+            "class": "Namespace\\ExceptionClass",
+            "message": "Exception message",
+            "stack_trace": "Stack trace as a string"
+        },
+        "previous_exception_1": {
+            "class": "Namespace\\PrevExceptionClass",
+            "message": "Prev exception message",
+            "stack_trace": "Prev stack trace as a string"
+        }
+        // ....
     }
 }
 ```
