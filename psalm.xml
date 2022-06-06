@@ -33,9 +33,6 @@
         <PossiblyUnusedMethod errorLevel="suppress"/>
         <PossiblyUnusedProperty errorLevel="suppress"/>
     </issueHandlers>
-    <stubs>
-        <file name="stubs/Response.stubphp"/>
-    </stubs>
     <plugins>
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
