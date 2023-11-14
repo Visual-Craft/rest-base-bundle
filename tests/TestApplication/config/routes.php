@@ -8,7 +8,7 @@ use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\ProcessRequestCo
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\ThrowAccessDeniedHttpExceptionController;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\ThrowInvalidRequestExceptionController;
 
-return function (RoutingConfigurator $routes): void {
+return static function (RoutingConfigurator $routes): void {
     $routes
         ->add('access_denied_request', '/api/access-denied-request')
         ->controller(ThrowAccessDeniedHttpExceptionController::class)

@@ -13,7 +13,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('visual_craft_rest_base');
         /**
-         * @psalm-suppress PossiblyNullReference, PossiblyUndefinedMethod, MixedMethodCall
+         * @psalm-suppress PossiblyNullReference, UndefinedInterfaceMethod, MixedMethodCall
          */
         $treeBuilder->getRootNode()
             ->children()
@@ -27,11 +27,11 @@ class Configuration implements ConfigurationInterface
                                 ->defaultNull()
                             ->end()
                             ->arrayNode('methods')
-                                ->beforeNormalization()->ifString()->then(static fn ($v) => preg_split('/\s*,\s*/', $v))->end()
+                                ->beforeNormalization()->ifString()->then(static fn (string $v) => preg_split('/\s*,\s*/', $v))->end()
                                 ->prototype('scalar')->end()
                             ->end()
                             ->arrayNode('ips')
-                                ->beforeNormalization()->ifString()->then(static fn ($v) => [$v])->end()
+                                ->beforeNormalization()->ifString()->then(static fn (string $v) => [$v])->end()
                                 ->prototype('scalar')->end()
                             ->end()
                         ->end()

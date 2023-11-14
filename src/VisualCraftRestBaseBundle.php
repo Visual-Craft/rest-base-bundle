@@ -6,6 +6,4 @@ namespace VisualCraft\RestBaseBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class VisualCraftRestBaseBundle extends Bundle
-{
-}
+class VisualCraftRestBaseBundle extends Bundle {}

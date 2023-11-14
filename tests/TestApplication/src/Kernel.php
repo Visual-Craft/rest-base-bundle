@@ -54,6 +54,7 @@ final class Kernel extends SymfonyKernel
         $routes->import($this->getProjectDir() . '/config/routes.php');
     }
 
+    /** @psalm-suppress UnusedParam */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $loader->load($this->getProjectDir() . '/config/{packages}/*.php', 'glob');
