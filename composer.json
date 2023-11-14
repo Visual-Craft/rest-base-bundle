@@ -25,7 +25,7 @@
         "symfony/browser-kit": "^5.4 || ^6.0",
         "symfony/phpunit-bridge": "^5.4 || ^6.0",
         "vimeo/psalm": "^5.15",
-        "visual-craft/php-cs-fixer-config": "^0.3.0"
+        "visual-craft/php-cs-fixer-config": "^0.3.1"
     },
     "autoload": {
         "psr-4": {
