@@ -37,6 +37,7 @@ class ResponseBuilder
 
     /**
      * @var array
+     * @psalm-var array<string, mixed>
      */
     private $serializerContext;
 
@@ -53,6 +54,10 @@ class ResponseBuilder
         $this->setFormat('json');
     }
 
+    /**
+     * @psalm-param array<string, array> $value
+     * @return $this
+     */
     public function setSerializerContext(array $value): self
     {
         $this->serializerContext = $value;

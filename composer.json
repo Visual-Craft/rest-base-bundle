@@ -19,13 +19,13 @@
         "ext-json": "*",
         "doctrine/annotations": "^1.13",
         "matthiasnoback/symfony-config-test": "^4.3",
-        "psalm/plugin-phpunit": "^0.16.1",
-        "psalm/plugin-symfony": "^3.1",
+        "psalm/plugin-phpunit": "^0.18.4",
+        "psalm/plugin-symfony": "^5.1.",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
         "symfony/browser-kit": "^5.4 || ^6.0",
         "symfony/phpunit-bridge": "^5.4 || ^6.0",
-        "vimeo/psalm": "^4.22",
-        "visual-craft/php-cs-fixer-config": "^0.2.0"
+        "vimeo/psalm": "^5.15",
+        "visual-craft/php-cs-fixer-config": "^0.3.1"
     },
     "autoload": {
         "psr-4": {
@@ -37,5 +37,15 @@
             "VisualCraft\\RestBaseBundle\\Tests\\TestApplication\\": "tests/TestApplication/src/",
             "VisualCraft\\RestBaseBundle\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff -v --ansi",
+        "cs-fix": "vendor/bin/php-cs-fixer fix --diff -v --ansi",
+        "lint": [
+            "@cs-fix",
+            "@psalm",
+            "@composer validate --no-check-all"
+        ],
+        "psalm": "vendor/bin/psalm"
     }
 }

@@ -39,7 +39,7 @@ class ConfigurationTest extends WebTestCase
     }
 
     /**
-     * @dataProvider zoneValidDataProvider
+     * @dataProvider provideZoneValidCases
      */
     public function testZoneValid(array $configurationValues, array $expectedProcessedConfigurationValues): void
     {
@@ -56,7 +56,7 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
-    public function zoneValidDataProvider(): iterable
+    public function provideZoneValidCases(): iterable
     {
         yield [[], []];
         yield [
@@ -140,7 +140,7 @@ class ConfigurationTest extends WebTestCase
     }
 
     /**
-     * @dataProvider debugValidDataProvider
+     * @dataProvider provideDebugValidCases
      */
     public function testDebugValid($configurationValues, $expectedProcessedConfigurationValues): void
     {
@@ -157,7 +157,7 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
-    public function debugValidDataProvider(): iterable
+    public function provideDebugValidCases(): iterable
     {
         yield [
             true,
@@ -170,7 +170,7 @@ class ConfigurationTest extends WebTestCase
     }
 
     /**
-     * @dataProvider mimeTypesValidDataProvider
+     * @dataProvider provideMimeTypesValidCases
      */
     public function testMimeTypesValid(array $configurationValues, array $expectedProcessedConfigurationValues): void
     {
@@ -187,7 +187,7 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
-    public function mimeTypesValidDataProvider(): iterable
+    public function provideMimeTypesValidCases(): iterable
     {
         yield [
             [
