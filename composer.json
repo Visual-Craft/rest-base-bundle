@@ -37,5 +37,15 @@
             "VisualCraft\\RestBaseBundle\\Tests\\TestApplication\\": "tests/TestApplication/src/",
             "VisualCraft\\RestBaseBundle\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff -v --ansi",
+        "cs-fix": "vendor/bin/php-cs-fixer fix --diff -v --ansi",
+        "lint": [
+            "@cs-fix",
+            "@psalm",
+            "@composer validate --no-check-all"
+        ],
+        "psalm": "vendor/bin/psalm"
     }
 }
