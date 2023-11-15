@@ -10,7 +10,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\HttpFoundation\ChainRequestMatcher;
 use Symfony\Component\HttpFoundation\RequestMatcher;
+use Symfony\Component\HttpFoundation\RequestMatcher\HostRequestMatcher;
+use Symfony\Component\HttpFoundation\RequestMatcher\IpsRequestMatcher;
+use Symfony\Component\HttpFoundation\RequestMatcher\MethodRequestMatcher;
+use Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\HttpKernel\KernelEvents;
 use VisualCraft\RestBaseBundle\Controller\ErrorController;
@@ -61,17 +66,44 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
         $matcherIndex = 0;
 
         foreach ($zoneConfig as $item) {
-            /** @psalm-suppress DeprecatedClass */
-            $matcherDefinition = new Definition(RequestMatcher::class);
-            $matcherDefinition
-                ->setArguments([
+            if (!class_exists(ChainRequestMatcher::class)) {
+                /** @psalm-suppress DeprecatedClass */
+                $matcherDefinition = new Definition(RequestMatcher::class, [
                     $item['path'],
                     $item['host'],
                     $item['methods'],
                     $item['ips'],
-                ])
-                ->addTag(self::ZONE_REQUEST_MATCHER_TAG)
-            ;
+                ]);
+            } else {
+                $matchers = [];
+                $path = $item['path'];
+
+                if ($path) {
+                    $matchers[] = new Definition(PathRequestMatcher::class, [$path]);
+                }
+
+                $host = $item['host'];
+
+                if ($host) {
+                    $matchers[] = new Definition(HostRequestMatcher::class, [$host]);
+                }
+
+                $methods = $item['methods'];
+
+                if ($methods) {
+                    $matchers[] = new Definition(MethodRequestMatcher::class, [$methods]);
+                }
+
+                $ips = $item['ips'];
+
+                if ($ips) {
+                    $matchers[] = new Definition(IpsRequestMatcher::class, [$ips]);
+                }
+                $matcherDefinition = new Definition(ChainRequestMatcher::class);
+                $matcherDefinition->setArguments([$matchers]);
+            }
+
+            $matcherDefinition->addTag(self::ZONE_REQUEST_MATCHER_TAG);
             $container->setDefinition(self::ZONE_REQUEST_MATCHER_TAG . '.instance_' . $matcherIndex++, $matcherDefinition);
         }
 
