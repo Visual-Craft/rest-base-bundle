@@ -56,6 +56,7 @@ class VisualCraftRestBaseExtension extends Extension implements PrependExtension
 
     /**
      * @psalm-param list<array{path: string|null, host: string|null, methods: list<string>, ips: list<string>}> $zoneConfig
+     * @psalm-suppress UndefinedClass
      */
     private function configureZoneMatchListener(ContainerBuilder $container, array $zoneConfig): void
     {
