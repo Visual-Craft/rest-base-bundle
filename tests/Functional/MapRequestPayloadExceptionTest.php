@@ -12,12 +12,15 @@ use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
  */
 class MapRequestPayloadExceptionTest extends FunctionalTestCase
 {
-    public function testSuccess(): void
+    protected function setUp(): void
     {
         if (!class_exists(MapRequestPayload::class)) {
-            $this->markTestSkipped();
+            $this->markTestSkipped('The MapRequestPayload attribute is not available. Symfony required 6.3>');
         }
+    }
 
+    public function testSuccess(): void
+    {
         $client = static::createClient();
         $client->request(
             'POST',
@@ -36,10 +39,6 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
 
     public function testValidationError(): void
     {
-        if (!class_exists(MapRequestPayload::class)) {
-            $this->markTestSkipped();
-        }
-
         $client = static::createClient();
         $client->request(
             'POST',
@@ -63,10 +62,6 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
 
     public function testMalformedDataError(): void
     {
-        if (!class_exists(MapRequestPayload::class)) {
-            $this->markTestSkipped();
-        }
-
         $client = static::createClient();
         $client->request(
             'POST',
@@ -89,10 +84,6 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
 
     public function testUnsupportedFormatException(): void
     {
-        if (!class_exists(MapRequestPayload::class)) {
-            $this->markTestSkipped();
-        }
-
         $client = static::createClient();
         $client->request(
             'POST',
