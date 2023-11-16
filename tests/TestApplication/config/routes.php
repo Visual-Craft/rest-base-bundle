@@ -32,7 +32,7 @@ return static function (RoutingConfigurator $routes): void {
     ;
     /** @psalm-suppress UndefinedClass, MixedArgument */
     $routes
-        ->add('login', '/api/map-request-payload')
+        ->add('map_request_payload', '/api/map-request-payload')
         ->controller(MapRequestPayloadController::class)
     ;
 };
