@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\LoginController;
+use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\MapQueryStringController;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\MapRequestPayloadController;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\ProcessRequestController;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Controller\ThrowAccessDeniedHttpExceptionController;
@@ -34,5 +35,10 @@ return static function (RoutingConfigurator $routes): void {
     $routes
         ->add('map_request_payload', '/api/map-request-payload')
         ->controller(MapRequestPayloadController::class)
+    ;
+    /** @psalm-suppress UndefinedClass, MixedArgument */
+    $routes
+        ->add('map_query_string', '/api/map-query-string')
+        ->controller(MapQueryStringController::class)
     ;
 };
