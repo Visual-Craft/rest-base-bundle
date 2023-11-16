@@ -11,10 +11,12 @@ use VisualCraft\RestBaseBundle\Problem\Problem;
 
 class HttExceptionUnsupportedFormatExceptionConverter implements ExceptionToProblemConverterInterface
 {
+    /** @psalm-suppress MixedInferredReturnType */
     public function convert(\Throwable $exception): ?Problem
     {
         $previousException = $exception->getPrevious();
 
+        /** @psalm-suppress UndefinedClass */
         if (!$previousException instanceof UnsupportedFormatException) {
             return null;
         }

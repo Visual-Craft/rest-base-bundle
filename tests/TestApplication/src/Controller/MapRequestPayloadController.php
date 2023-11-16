@@ -11,6 +11,7 @@ use VisualCraft\RestBaseBundle\Tests\TestApplication\Dto\MapRequestPayloadDto;
 
 class MapRequestPayloadController extends AbstractController
 {
+    /** @psalm-suppress UndefinedAttributeClass */
     public function __invoke(#[MapRequestPayload] MapRequestPayloadDto $mapRequestPayloadDto): JsonResponse
     {
         return new JsonResponse([]);
