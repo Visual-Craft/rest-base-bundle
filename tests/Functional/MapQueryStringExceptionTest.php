@@ -24,14 +24,7 @@ class MapQueryStringExceptionTest extends FunctionalTestCase
         $client = static::createClient();
         $client->request(
             'POST',
-            '/api/map-query-string',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json'],
-            json_encode([
-                'status' => 'placed',
-                'total' => 11,
-            ], JSON_THROW_ON_ERROR)
+            '/api/map-query-string?status=placed',
         );
 
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -42,59 +35,7 @@ class MapQueryStringExceptionTest extends FunctionalTestCase
         $client = static::createClient();
         $client->request(
             'POST',
-            '/api/map-query-string',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json'],
-            json_encode([
-                'comment' => 'Lorem',
-                'total' => '',
-            ], JSON_THROW_ON_ERROR)
-        );
-
-        $this->assertProblemResponse(
-            $client->getResponse(),
-            Response::HTTP_BAD_REQUEST,
-            'validation_error',
-            'Validation error'
-        );
-    }
-
-    public function testMalformedDataError(): void
-    {
-        $client = static::createClient();
-        $client->request(
-            'POST',
-            '/api/map-query-string',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json'],
-            json_encode([
-                'status' => 'placed',
-            ], JSON_THROW_ON_ERROR)
-        );
-
-        $this->assertProblemResponse(
-            $client->getResponse(),
-            Response::HTTP_BAD_REQUEST,
-            'validation_error',
-            'Validation error'
-        );
-    }
-
-    public function testUnsupportedFormatException(): void
-    {
-        $client = static::createClient();
-        $client->request(
-            'POST',
-            '/api/map-query-string',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'text/html'],
-            json_encode([
-                'status' => 'placed',
-                'total' => 11,
-            ], JSON_THROW_ON_ERROR)
+            '/api/map-query-string?status=1',
         );
 
         $this->assertProblemResponse(
