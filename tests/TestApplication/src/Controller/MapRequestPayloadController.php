@@ -12,7 +12,9 @@ use VisualCraft\RestBaseBundle\Tests\TestApplication\Dto\MapRequestPayloadDto;
 class MapRequestPayloadController extends AbstractController
 {
     /** @psalm-suppress UndefinedAttributeClass, ParseError */
-    public function __invoke(#[MapRequestPayload] MapRequestPayloadDto $mapRequestPayloadDto): JsonResponse
+    public function __invoke(
+        #[MapRequestPayload]
+        MapRequestPayloadDto $mapRequestPayloadDto): JsonResponse
     {
         return new JsonResponse([]);
     }
