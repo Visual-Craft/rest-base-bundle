@@ -20,6 +20,8 @@ services:
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InvalidRequestExceptionConverter: ~
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InvalidRequestBodyFormatExceptionConverter: ~
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InvalidRequestContentTypeExceptionConverter: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\HttExceptionValidationFailedExceptionConverter: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\HttExceptionUnsupportedFormatExceptionConverter: ~
     VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint: ~
     VisualCraft\RestBaseBundle\Security\AuthenticationFailureHandler: ~
     VisualCraft\RestBaseBundle\Serializer\FormatRegistry: ~
