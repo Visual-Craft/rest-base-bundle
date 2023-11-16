@@ -9,9 +9,9 @@ class MapQueryStringDto
     #[Assert\Choice(['placed', 'shipped', 'delivered'])]
     public ?string $status;
 
-    public ?float $total;
+    public float $total;
 
-    public function __construct(?string $status, ?float $total)
+    public function __construct(?string $status, float $total)
     {
         $this->status = $status;
         $this->total = $total;

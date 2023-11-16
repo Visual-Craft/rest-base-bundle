@@ -24,13 +24,13 @@ class MapQueryStringExceptionTest extends FunctionalTestCase
         $client = static::createClient();
         $client->request(
             'POST',
-            '/api/map-query-string?status=placed',
+            '/api/map-query-string?status=placed&total=1',
         );
 
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
-    public function testValidationError(): void
+    public function testValidationErrorWhenValueIsInvalid(): void
     {
         $client = static::createClient();
         $client->request(
@@ -44,5 +44,32 @@ class MapQueryStringExceptionTest extends FunctionalTestCase
             'validation_error',
             'Validation error'
         );
+    }
+
+    public function testValidationErrorWhenRequiredQueryParamIsAbsent(): void
+    {
+        $client = static::createClient();
+        $client->request(
+            'POST',
+            '/api/map-query-string?status=placed',
+        );
+
+        $this->assertProblemResponse(
+            $client->getResponse(),
+            Response::HTTP_BAD_REQUEST,
+            'validation_error',
+            'Validation error'
+        );
+    }
+
+    public function testValidationErrorWhenQueryStringsAreAbsent(): void
+    {
+        $client = static::createClient();
+        $client->request(
+            'POST',
+            '/api/map-query-string',
+        );
+
+        $this->assertSame(Response::HTTP_NOT_FOUND, $client->getResponse()->getStatusCode());
     }
 }
