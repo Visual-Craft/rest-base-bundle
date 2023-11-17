@@ -17,7 +17,7 @@ class MapQueryParameterController extends AbstractController
         #[MapQueryParameter]
         array $ids,
         #[MapQueryParameter]
-        string $firstName,
+        string $firstName
     ): JsonResponse
     {
         return new JsonResponse([]);

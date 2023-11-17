@@ -14,7 +14,8 @@ class MapQueryStringController extends AbstractController
     /** @psalm-suppress UndefinedAttributeClass, ParseError */
     public function __invoke(
         #[MapQueryString]
-        MapQueryStringDto $mapQueryStringDto): JsonResponse
+        MapQueryStringDto $mapQueryStringDto
+    ): JsonResponse
     {
         return new JsonResponse([]);
     }

@@ -14,7 +14,8 @@ class MapRequestPayloadController extends AbstractController
     /** @psalm-suppress UndefinedAttributeClass, ParseError */
     public function __invoke(
         #[MapRequestPayload]
-        MapRequestPayloadDto $mapRequestPayloadDto): JsonResponse
+        MapRequestPayloadDto $mapRequestPayloadDto
+    ): JsonResponse
     {
         return new JsonResponse([]);
     }
