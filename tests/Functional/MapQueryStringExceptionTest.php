@@ -23,8 +23,12 @@ class MapQueryStringExceptionTest extends FunctionalTestCase
     {
         $client = static::createClient();
         $client->request(
-            'POST',
-            '/api/map-query-string?status=placed&total=1',
+            'GET',
+            '/api/map-query-string',
+            [
+                'status' => 'placed',
+                'total' => 1,
+            ],
         );
 
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -34,8 +38,11 @@ class MapQueryStringExceptionTest extends FunctionalTestCase
     {
         $client = static::createClient();
         $client->request(
-            'POST',
-            '/api/map-query-string?status=1',
+            'GET',
+            '/api/map-query-string',
+            [
+                'status' => 1,
+            ],
         );
 
         $this->assertProblemResponse(
@@ -50,8 +57,11 @@ class MapQueryStringExceptionTest extends FunctionalTestCase
     {
         $client = static::createClient();
         $client->request(
-            'POST',
+            'GET',
             '/api/map-query-string?status=placed',
+            [
+                'status' => 'placed',
+            ],
         );
 
         $this->assertProblemResponse(
@@ -66,7 +76,7 @@ class MapQueryStringExceptionTest extends FunctionalTestCase
     {
         $client = static::createClient();
         $client->request(
-            'POST',
+            'GET',
             '/api/map-query-string',
         );
 
