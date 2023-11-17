@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
@@ -15,7 +16,10 @@ class HttExceptionValidationFailedExceptionConverter implements ExceptionToProbl
     {
         $previousException = $exception->getPrevious();
 
-        if (!$previousException instanceof ValidationFailedException) {
+        if (
+            !$exception instanceof HttpException
+            || !$previousException instanceof ValidationFailedException
+        ) {
             return null;
         }
 

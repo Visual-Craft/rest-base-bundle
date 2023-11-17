@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Serializer\Exception\UnsupportedFormatException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
@@ -17,7 +18,10 @@ class HttExceptionUnsupportedFormatExceptionConverter implements ExceptionToProb
         $previousException = $exception->getPrevious();
 
         /** @psalm-suppress UndefinedClass */
-        if (!$previousException instanceof UnsupportedFormatException) {
+        if (
+            !$exception instanceof HttpException
+            || !$previousException instanceof UnsupportedFormatException
+        ) {
             return null;
         }
 
