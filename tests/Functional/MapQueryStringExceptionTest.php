@@ -58,7 +58,7 @@ class MapQueryStringExceptionTest extends FunctionalTestCase
         $client = static::createClient();
         $client->request(
             'GET',
-            '/api/map-query-string?status=placed',
+            '/api/map-query-string',
             [
                 'status' => 'placed',
             ],
