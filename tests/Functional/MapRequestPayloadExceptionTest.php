@@ -104,4 +104,28 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
             'Validation error'
         );
     }
+
+    public function testExtraAttributesError(): void
+    {
+        $client = static::createClient();
+        $client->request(
+            'POST',
+            '/api/map-request-payload',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            json_encode([
+                'comment' => 'Lorem Ipsum is simply dummy text of the printing.',
+                'rating' => 1,
+                'rating333' => 1,
+            ], JSON_THROW_ON_ERROR)
+        );
+
+        $this->assertProblemResponse(
+            $client->getResponse(),
+            Response::HTTP_BAD_REQUEST,
+            'validation_error',
+            'Validation error'
+        );
+    }
 }
