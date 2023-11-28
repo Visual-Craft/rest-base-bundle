@@ -7,6 +7,7 @@ namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Serializer\Exception\ExtraAttributesException;
+use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
@@ -29,13 +30,20 @@ class HttExceptionValidationFailedExceptionConverter implements ExceptionToProbl
             return $problem;
         }
 
-        if ($exception instanceof ExtraAttributesException) {
+        if ($exception instanceof UnexpectedValueException || $exception instanceof ExtraAttributesException) {
             $problem = new Problem(
-                'Validation error',
+                'Invalid request body format',
                 Response::HTTP_BAD_REQUEST,
-                'validation_error'
+                'invalid_request_body_format'
             );
-            $problem->addDetails('cause', 'extra_attributes');
+
+            if ($exception instanceof UnexpectedValueException) {
+                $problem->addDetails('cause', 'unexpected_value');
+            }
+
+            if ($exception instanceof ExtraAttributesException) {
+                $problem->addDetails('cause', 'extra_attributes');
+            }
 
             return $problem;
         }

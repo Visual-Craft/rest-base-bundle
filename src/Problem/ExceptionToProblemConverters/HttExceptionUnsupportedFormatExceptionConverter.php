@@ -25,14 +25,11 @@ class HttExceptionUnsupportedFormatExceptionConverter implements ExceptionToProb
             return null;
         }
 
-        $result = new Problem(
-            'Validation error',
+        return new Problem(
+            'Invalid request content type',
             Response::HTTP_BAD_REQUEST,
-            'validation_error'
+            'invalid_request_content_type'
         );
-        $result->addDetails('cause', 'unsupported_format_exception');
-
-        return $result;
     }
 
     public static function getDefaultPriority(): int
