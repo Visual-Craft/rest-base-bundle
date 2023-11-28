@@ -82,7 +82,7 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
         );
     }
 
-    public function testUnsupportedFormatException(): void
+    public function testInvalidRequestContentTypeException(): void
     {
         $client = static::createClient();
         $client->request(
