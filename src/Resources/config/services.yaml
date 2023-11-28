@@ -22,6 +22,7 @@ services:
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InvalidRequestContentTypeExceptionConverter: ~
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\HttExceptionValidationFailedExceptionConverter: ~
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\HttExceptionUnsupportedFormatExceptionConverter: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\HttExceptionValidationFailedExceptionSerializerConverter: ~
     VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint: ~
     VisualCraft\RestBaseBundle\Security\AuthenticationFailureHandler: ~
     VisualCraft\RestBaseBundle\Serializer\FormatRegistry: ~
