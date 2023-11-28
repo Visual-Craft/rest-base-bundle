@@ -11,6 +11,9 @@ use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException;
 use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException;
 use VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException;
 
+/**
+ * @psalm-suppress DeprecatedClass
+ */
 return static function (ContainerConfigurator $container): void {
     $configuration = [
         'secret' => 'F00',

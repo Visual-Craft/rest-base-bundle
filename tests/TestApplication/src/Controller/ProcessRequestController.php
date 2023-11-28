@@ -10,12 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use VisualCraft\RestBaseBundle\Request\RequestBodyDeserializer;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Dto\TestDto;
 
+/**
+ * @psalm-suppress DeprecatedClass
+ */
 class ProcessRequestController extends AbstractController
 {
-    /**
-     * @var RequestBodyDeserializer
-     */
-    private $deserializer;
+    private RequestBodyDeserializer $deserializer;
 
     public function __construct(RequestBodyDeserializer $deserializer)
     {

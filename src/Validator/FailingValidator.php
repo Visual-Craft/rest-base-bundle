@@ -8,6 +8,9 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException;
 
+/**
+ * @deprecated
+ */
 class FailingValidator
 {
     private ValidatorInterface $validator;
