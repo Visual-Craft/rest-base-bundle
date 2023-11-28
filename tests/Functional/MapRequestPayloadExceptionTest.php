@@ -37,7 +37,10 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
-    public function testValidationError(): void
+    /**
+     * @dataProvider provideValidationErrorCases
+     */
+    public function testValidationError(array $content): void
     {
         $client = static::createClient();
         $client->request(
@@ -46,10 +49,7 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
             [],
             [],
             ['CONTENT_TYPE' => 'application/json'],
-            json_encode([
-                'comment' => 'Lorem',
-                'rating' => 10,
-            ], JSON_THROW_ON_ERROR)
+            json_encode($content, JSON_THROW_ON_ERROR)
         );
 
         $this->assertProblemResponse(
@@ -127,5 +127,22 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
             'invalid_request_body_format',
             'Invalid request body format'
         );
+    }
+
+    /**
+     * @psalm-return iterable<array-key, array{
+     *     comment: array|string,
+     *     rating?: int|array
+     * }>
+     */
+    private function provideValidationErrorCases(): iterable
+    {
+        yield 'wrong_types' => [
+            'content' => ['comment' => 1, 'rating' => []],
+        ];
+
+        yield 'required_parameter_is_absent' => [
+            'content' => ['comment' => []],
+        ];
     }
 }
