@@ -37,13 +37,17 @@ class HttExceptionValidationFailedExceptionConverter implements ExceptionToProbl
                 'invalid_request_body_format'
             );
 
+            $cause = 'invalid_format';
+
             if ($exception instanceof UnexpectedValueException) {
-                $problem->addDetails('cause', 'unexpected_value');
+                $cause = 'unexpected_value';
             }
 
             if ($exception instanceof ExtraAttributesException) {
-                $problem->addDetails('cause', 'extra_attributes');
+                $cause = 'extra_attributes';
             }
+
+            $problem->addDetails('cause', $cause);
 
             return $problem;
         }
