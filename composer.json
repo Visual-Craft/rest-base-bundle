@@ -23,7 +23,7 @@
         "psr/log": "^1.0 || ^2.0 || ^3.0",
         "symfony/browser-kit": "^5.4 || ^6.0 || ^7.0",
         "symfony/phpunit-bridge": "^5.4 || ^6.0 || ^7.0",
-        "vimeo/psalm": "^5.15",
+        "vimeo/psalm": "^5.16",
         "visual-craft/php-cs-fixer-config": "^0.3.1"
     },
     "autoload": {
