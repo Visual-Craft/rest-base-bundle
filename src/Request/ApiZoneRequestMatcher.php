@@ -12,6 +12,7 @@ class ApiZoneRequestMatcher implements RequestMatcherInterface
 {
     public function matches(Request $request): bool
     {
+        /** @psalm-suppress ReservedWord */
         return $request->attributes->get(Constants::API_ZONE_ATTRIBUTE, false) === true;
     }
 }
