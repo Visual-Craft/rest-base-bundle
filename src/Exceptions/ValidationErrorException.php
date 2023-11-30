@@ -6,6 +6,9 @@ namespace VisualCraft\RestBaseBundle\Exceptions;
 
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
+/**
+ * @deprecated
+ */
 class ValidationErrorException extends \RuntimeException
 {
     /**

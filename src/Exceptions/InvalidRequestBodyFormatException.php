@@ -6,5 +6,6 @@ namespace VisualCraft\RestBaseBundle\Exceptions;
 
 /**
  * @deprecated
+ * @psalm-suppress DeprecatedClass
  */
 class InvalidRequestBodyFormatException extends InvalidRequestException {}

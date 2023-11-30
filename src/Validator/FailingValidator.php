@@ -10,6 +10,7 @@ use VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException;
 
 /**
  * @deprecated
+ * @psalm-suppress DeprecatedClass
  */
 class FailingValidator
 {

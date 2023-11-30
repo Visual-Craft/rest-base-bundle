@@ -7,6 +7,9 @@ namespace VisualCraft\RestBaseBundle\Tests\TestApplication\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException;
 
+/**
+ * @psalm-suppress DeprecatedClass
+ */
 class ThrowInvalidRequestExceptionController extends AbstractController
 {
     public function __invoke(): void
