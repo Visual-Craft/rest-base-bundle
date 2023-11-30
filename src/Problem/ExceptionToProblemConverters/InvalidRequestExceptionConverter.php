@@ -9,6 +9,9 @@ use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
 
+/**
+ * @deprecated
+ */
 class InvalidRequestExceptionConverter implements ExceptionToProblemConverterInterface
 {
     public function convert(\Throwable $exception): ?Problem
