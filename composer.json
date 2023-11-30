@@ -17,7 +17,7 @@
     },
     "require-dev": {
         "ext-json": "*",
-        "matthiasnoback/symfony-config-test": "^4.3",
+        "matthiasnoback/symfony-config-test": "^4.3 || ^5.1",
         "psalm/plugin-phpunit": "^0.18.4",
         "psalm/plugin-symfony": "^5.1.",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
