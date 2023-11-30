@@ -421,6 +421,18 @@ class ProcessRequestController extends AbstractController
 }
 ```
 
+Serializer
+----------
+By default, additional attributes that are not mapped to the denormalized object will be ignored by the Serializer component. If you prefer to throw an exception when this happens, set the `allow_extra_attributes` context option to `false`:
+```yaml
+# config/packages/framework.yaml
+
+framework:
+    serializer:
+        default_context:
+            allow_extra_attributes: false
+```
+
 Tests
 -----
 ```sh
