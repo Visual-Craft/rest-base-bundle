@@ -97,6 +97,34 @@ Response body:
   "details": []
 }
 ```
+#### Previous exceptions before HttpException:
+- Symfony\Component\Serializer\Exception\UnsupportedFormatException
+
+Response body:
+```json
+{
+  "title": "Invalid request content type",
+  "statusCode": 400,
+  "type": "invalid_request_content_type",
+  "details": []
+}
+```
+- Symfony\Component\Validator\Exception\ValidationFailedException
+
+Response body:
+```json
+{
+  "title": "Validation error",
+  "statusCode": 400,
+  "type": "validation_error",
+  "details": {
+    "cause": "validation_error",
+    "violations": {
+      //serialized by symfony/serializer ConstraintViolationList
+    }
+  }
+}
+```
 ----
 #### VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\InsufficientAuthenticationException
 
