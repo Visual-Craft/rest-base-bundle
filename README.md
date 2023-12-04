@@ -5,8 +5,8 @@ Symfony Bundle which provides base foundation for REST API applications.
 Features include:
 
 * Exception converter: transforms exceptions and errors to structured responses (JSON, XML).
-* (Deprecated) Request body deserializer: RESTfull decoding of HTTP request body and Accept headers.
-* (Deprecated) Failing validator: data validator integrated with Exception converter.
+* (Deprecated since v0.3) Request body deserializer: RESTfull decoding of HTTP request body and Accept headers.
+* (Deprecated since v0.3) Failing validator: data validator integrated with Exception converter.
 * Possibility to check Api zone using Request attribute.
 * Since Symfony 6.3 support: [MapRequestPayload, MapQueryString](https://symfony.com/blog/new-in-symfony-6-3-mapping-request-data-to-typed-objects), [MapQueryParameter](https://symfony.com/blog/new-in-symfony-6-3-query-parameters-mapper)
 
@@ -113,7 +113,7 @@ Response body:
 }
 ```
 ----
-#### (Deprecated) VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException
+#### (Deprecated since v0.3) VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException
 
 Base exception thrown if request body are invalid.
 
@@ -127,7 +127,7 @@ Response body:
 }
 ```
 ----
-#### (Deprecated) VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException
+#### (Deprecated since v0.3) VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException
 
 Extends from InvalidRequestException.
 Thrown when symfony/serializer can't deserialize request body.
@@ -147,7 +147,7 @@ Response body:
 * "unexpected_value" if data fields have invalid values
 * "extra_attributes" if request body have extra attributes
 ----
-#### (Deprecated) VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException
+#### (Deprecated since v0.3) VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException
 
 Extends from InvalidRequestException.
 Thrown when no content type parameter are not pointed or content type have unsupported value.
@@ -169,7 +169,7 @@ Response body:
 * "missing" : if content type are not pointed
 * "unsupported" : if content have unsupported value
 ----
-#### (Deprecated) VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException
+#### (Deprecated since v0.3) VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException
 
 Response body:
 ```json
