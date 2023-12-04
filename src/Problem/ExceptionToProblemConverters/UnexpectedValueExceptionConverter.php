@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\Exception\ExtraAttributesException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
 
-class HttExceptionValidationFailedExceptionSerializerConverter implements ExceptionToProblemConverterInterface
+class UnexpectedValueExceptionConverter implements ExceptionToProblemConverterInterface
 {
     public function convert(\Throwable $exception): ?Problem
     {
-        if (!$exception instanceof UnexpectedValueException && !$exception instanceof ExtraAttributesException) {
+        if (!$exception instanceof UnexpectedValueException) {
             return null;
         }
 
@@ -24,17 +23,7 @@ class HttExceptionValidationFailedExceptionSerializerConverter implements Except
             'invalid_request_body_format'
         );
 
-        $cause = 'invalid_format';
-
-        if ($exception instanceof UnexpectedValueException) {
-            $cause = 'unexpected_value';
-        }
-
-        if ($exception instanceof ExtraAttributesException) {
-            $cause = 'extra_attributes';
-        }
-
-        $problem->addDetails('cause', $cause);
+        $problem->addDetails('cause', 'unexpected_value');
 
         return $problem;
     }
