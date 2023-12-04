@@ -5,9 +5,10 @@ Symfony Bundle which provides base foundation for REST API applications.
 Features include:
 
 * Exception converter: transforms exceptions and errors to structured responses (JSON, XML).
-* Request body deserializer: RESTfull decoding of HTTP request body and Accept headers.
-* Failing validator: data validator integrated with Exception converter.
+* (Deprecated) Request body deserializer: RESTfull decoding of HTTP request body and Accept headers.
+* (Deprecated) Failing validator: data validator integrated with Exception converter.
 * Possibility to check Api zone using Request attribute.
+* Since Symfony 6.3 support: [MapRequestPayload, MapQueryString](https://symfony.com/blog/new-in-symfony-6-3-mapping-request-data-to-typed-objects), [MapQueryParameter](https://symfony.com/blog/new-in-symfony-6-3-query-parameters-mapper)
 
 Installation
 ------------
@@ -38,6 +39,19 @@ class AppKernel extends Kernel
     }
 }
 ```
+
+### Serializer
+
+By default, additional attributes that are not mapped to the denormalized object will be ignored by the Serializer component. If you prefer to throw an exception when this happens, set the `allow_extra_attributes` context option to `false`:
+```yaml
+# config/packages/framework.yaml
+
+framework:
+    serializer:
+        default_context:
+            allow_extra_attributes: false
+```
+
 Errors
 -----
 ### Configuration
@@ -99,7 +113,7 @@ Response body:
 }
 ```
 ----
-#### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException
+#### (Deprecated) VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException
 
 Base exception thrown if request body are invalid.
 
@@ -113,7 +127,7 @@ Response body:
 }
 ```
 ----
-#### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException
+#### (Deprecated) VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException
 
 Extends from InvalidRequestException.
 Thrown when symfony/serializer can't deserialize request body.
@@ -133,7 +147,7 @@ Response body:
 * "unexpected_value" if data fields have invalid values
 * "extra_attributes" if request body have extra attributes
 ----
-#### VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException
+#### (Deprecated) VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException
 
 Extends from InvalidRequestException.
 Thrown when no content type parameter are not pointed or content type have unsupported value.
@@ -155,9 +169,9 @@ Response body:
 * "missing" : if content type are not pointed
 * "unsupported" : if content have unsupported value
 ----
-#### VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException
+#### (Deprecated) VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException
 
-response body:
+Response body:
 ```json
 {
   "title": "Validation error",
@@ -171,6 +185,31 @@ response body:
 }
 ```
 ----
+#### Symfony\Component\Serializer\Exception\ExtraAttributesException
+Response body:
+```json
+{
+  "title": "Invalid request body format",
+  "statusCode": 400,
+  "type": "invalid_request_body_format",
+  "details": {
+    "cause": "extra_attributes"
+  }
+}
+```
+----
+#### Symfony\Component\Serializer\Exception\UnexpectedValueException
+Response body:
+```json
+{
+  "title": "Invalid request body format",
+  "statusCode": 400,
+  "type": "invalid_request_body_format",
+  "details": {
+    "cause": "unexpected_value"
+  }
+}
+```
 ### Enable support security exceptions
 If you use separate firewall for your API, use `VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint`
 ```yaml
@@ -421,23 +460,11 @@ class ProcessRequestController extends AbstractController
 }
 ```
 
-Serializer
-----------
-By default, additional attributes that are not mapped to the denormalized object will be ignored by the Serializer component. If you prefer to throw an exception when this happens, set the `allow_extra_attributes` context option to `false`:
-```yaml
-# config/packages/framework.yaml
-
-framework:
-    serializer:
-        default_context:
-            allow_extra_attributes: false
-```
-
 Tests
 -----
 ```sh
 $ vendor/bin/simple-phpunit install
-$ vendor/bin/phpunit
+$ vendor/bin/simple-phpunit
 ```
 
 Additional Tools
