@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 return static function (ContainerConfigurator $container): void {
-    $container->extension('security', [
-        'enable_authenticator_manager' => true,
+    $config = [
         'firewalls' => [
             'main' => [
                 'entry_point' => \VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint::class,
@@ -45,5 +45,12 @@ return static function (ContainerConfigurator $container): void {
                 'roles' => ['ROLE_ADMIN'],
             ],
         ],
-    ]);
+    ];
+
+
+    if (Kernel::MAJOR_VERSION < 7) {
+        $config['enable_authenticator_manager'] = true;
+    }
+
+    $container->extension('security', $config);
 };

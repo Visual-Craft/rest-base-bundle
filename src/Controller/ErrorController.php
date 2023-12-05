@@ -30,6 +30,7 @@ class ErrorController
 
     public function __invoke(\Throwable $exception, Request $request): Response
     {
+        /** @psalm-suppress ReservedWord, RedundantCondition */
         if ($request->attributes->get(Constants::API_ZONE_ATTRIBUTE, false)) {
             return $this->problemResponseFactory->create($exception);
         }

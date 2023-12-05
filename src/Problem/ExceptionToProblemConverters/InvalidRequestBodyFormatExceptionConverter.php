@@ -11,6 +11,9 @@ use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestBodyFormatException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
 
+/**
+ * @deprecated
+ */
 class InvalidRequestBodyFormatExceptionConverter implements ExceptionToProblemConverterInterface
 {
     public function convert(\Throwable $exception): ?Problem

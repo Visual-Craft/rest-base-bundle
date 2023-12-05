@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace VisualCraft\RestBaseBundle\Request;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Serializer\Exception\ExtraAttributesException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -14,6 +16,10 @@ use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestContentTypeException;
 use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 use VisualCraft\RestBaseBundle\Validator\FailingValidator;
 
+/**
+ * @deprecated since Symfony 6.3 {@see MapRequestPayload, MapQueryString, MapRequestPayload}
+ * @psalm-suppress DeprecatedClass
+ */
 class RequestBodyDeserializer
 {
     /**

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\Exceptions;
 
+/**
+ * @deprecated
+ * @psalm-suppress DeprecatedClass
+ */
 class InvalidRequestContentTypeException extends InvalidRequestException
 {
     public const CODE_MISSING = 1;

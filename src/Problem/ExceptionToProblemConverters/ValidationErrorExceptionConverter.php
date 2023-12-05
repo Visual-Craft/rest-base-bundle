@@ -9,6 +9,9 @@ use VisualCraft\RestBaseBundle\Exceptions\ValidationErrorException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
 
+/**
+ * @deprecated
+ */
 class ValidationErrorExceptionConverter implements ExceptionToProblemConverterInterface
 {
     public function convert(\Throwable $exception): ?Problem
