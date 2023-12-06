@@ -4,7 +4,7 @@
     "description": "Symfony Bundle which provides base foundation for REST API applications",
     "license": "MIT",
     "require": {
-        "php": ">=7.4 || >=8.2",
+        "php": ">=7.4",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.4",
         "symfony/framework-bundle": "^5.4 || ^6.0 || ^7.0",
