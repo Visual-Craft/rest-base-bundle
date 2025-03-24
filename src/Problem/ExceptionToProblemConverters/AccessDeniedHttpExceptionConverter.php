@@ -11,6 +11,7 @@ use VisualCraft\RestBaseBundle\Problem\Problem;
 
 class AccessDeniedHttpExceptionConverter implements ExceptionToProblemConverterInterface
 {
+    #[\Override]
     public function convert(\Throwable $exception): ?Problem
     {
         if ($exception instanceof AccessDeniedHttpException) {

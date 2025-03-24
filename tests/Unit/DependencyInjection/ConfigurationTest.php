@@ -56,7 +56,10 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
-    public function provideZoneValidCases(): iterable
+    /**
+     * @psalm-return iterable<array-key, array<array-key, array>>
+     */
+    public static function provideZoneValidCases(): iterable
     {
         yield [[], []];
         yield [
@@ -142,7 +145,7 @@ class ConfigurationTest extends WebTestCase
     /**
      * @dataProvider provideDebugValidCases
      */
-    public function testDebugValid($configurationValues, $expectedProcessedConfigurationValues): void
+    public function testDebugValid(bool $configurationValues, bool $expectedProcessedConfigurationValues): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -157,7 +160,10 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
-    public function provideDebugValidCases(): iterable
+    /**
+     * @psalm-return iterable<array-key, array{0: bool, 1: bool}>
+     */
+    public static function provideDebugValidCases(): iterable
     {
         yield [
             true,
@@ -187,7 +193,10 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
-    public function provideMimeTypesValidCases(): iterable
+    /**
+     * @psalm-return iterable<array-key, array<array-key, array<string, string>>>
+     */
+    public static function provideMimeTypesValidCases(): iterable
     {
         yield [
             [
@@ -209,6 +218,7 @@ class ConfigurationTest extends WebTestCase
         ];
     }
 
+    #[\Override]
     protected function getConfiguration(): Configuration
     {
         return new Configuration();

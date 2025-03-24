@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryString;
  */
 class MapQueryParameterExceptionTest extends FunctionalTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         if (!class_exists(MapQueryString::class)) {
@@ -51,11 +52,13 @@ class MapQueryParameterExceptionTest extends FunctionalTestCase
 
     /**
      * @psalm-return iterable<array-key, array{
-     *     ids?: array|string,
-     *     firstName?: string|array
+     *     content: array{
+     *         ids?: array|string,
+     *         firstName?: string|array
+     *     }
      * }>
      */
-    private function provideNotFoundWhenRequiredParameterIsAbsentOrInvalidTypeCases(): iterable
+    private static function provideNotFoundWhenRequiredParameterIsAbsentOrInvalidTypeCases(): iterable
     {
         yield 'wrong_types' => [
             'content' => ['ids' => 'test', 'firstName' => []],

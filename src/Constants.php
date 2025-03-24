@@ -6,5 +6,5 @@ namespace VisualCraft\RestBaseBundle;
 
 class Constants
 {
-    public const API_ZONE_ATTRIBUTE = '_rest_base_api_zone';
+    public const string API_ZONE_ATTRIBUTE = '_rest_base_api_zone';
 }

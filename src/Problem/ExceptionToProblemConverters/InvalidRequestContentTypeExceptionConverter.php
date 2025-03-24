@@ -15,6 +15,7 @@ use VisualCraft\RestBaseBundle\Problem\Problem;
  */
 class InvalidRequestContentTypeExceptionConverter implements ExceptionToProblemConverterInterface
 {
+    #[\Override]
     public function convert(\Throwable $exception): ?Problem
     {
         if (!$exception instanceof InvalidRequestContentTypeException) {

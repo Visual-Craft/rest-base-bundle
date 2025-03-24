@@ -22,6 +22,7 @@ class AuthenticationFailureHandler implements AuthenticationFailureHandlerInterf
         $this->problemResponseFactory = $problemResponseFactory;
     }
 
+    #[\Override]
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
         return $this->problemResponseFactory->create($exception);

@@ -10,8 +10,8 @@ namespace VisualCraft\RestBaseBundle\Exceptions;
  */
 class InvalidRequestContentTypeException extends InvalidRequestException
 {
-    public const CODE_MISSING = 1;
-    public const CODE_UNSUPPORTED = 2;
+    public const int CODE_MISSING = 1;
+    public const int CODE_UNSUPPORTED = 2;
 
     /**
      * @var array
@@ -22,7 +22,7 @@ class InvalidRequestContentTypeException extends InvalidRequestException
         string $message = '',
         int $code = 0,
         array $validContentTypes = [],
-        \Throwable $previous = null
+        ?\Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
         $this->validContentTypes = $validContentTypes;

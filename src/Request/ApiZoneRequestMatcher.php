@@ -10,6 +10,7 @@ use VisualCraft\RestBaseBundle\Constants;
 
 class ApiZoneRequestMatcher implements RequestMatcherInterface
 {
+    #[\Override]
     public function matches(Request $request): bool
     {
         /** @psalm-suppress ReservedWord */

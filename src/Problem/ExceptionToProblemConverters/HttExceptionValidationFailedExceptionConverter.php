@@ -12,6 +12,7 @@ use VisualCraft\RestBaseBundle\Problem\Problem;
 
 class HttExceptionValidationFailedExceptionConverter implements ExceptionToProblemConverterInterface
 {
+    #[\Override]
     public function convert(\Throwable $exception): ?Problem
     {
         $previousException = $exception->getPrevious();

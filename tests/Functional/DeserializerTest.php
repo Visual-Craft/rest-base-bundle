@@ -6,6 +6,7 @@ namespace VisualCraft\RestBaseBundle\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Webmozart\Assert\Assert;
 
 /**
  * @internal
@@ -16,6 +17,7 @@ class DeserializerTest extends WebTestCase
     {
         $client = static::createClient();
         $encodedData = json_encode(['field1' => 'field1', 'field2' => 'val2', 'field3' => 'val3']);
+        Assert::string($encodedData);
         $client->request(
             'POST',
             '/api/process-request',
@@ -27,6 +29,8 @@ class DeserializerTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
-        $this->assertJsonStringEqualsJsonString($encodedData, $response->getContent());
+        $content = $response->getContent();
+        Assert::string($content);
+        $this->assertJsonStringEqualsJsonString($encodedData, $content);
     }
 }

@@ -56,7 +56,7 @@ class RequestBodyDeserializer
         } else {
             $contentType = $request->headers->get('Content-Type');
 
-            if (!$contentType) {
+            if ($contentType === null) {
                 throw new InvalidRequestContentTypeException(
                     'Missing Content-Type',
                     InvalidRequestContentTypeException::CODE_MISSING,

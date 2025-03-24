@@ -6,6 +6,7 @@ namespace VisualCraft\RestBaseBundle\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Webmozart\Assert\Assert;
 
 /**
  * @internal
@@ -17,9 +18,10 @@ class FunctionalTestCase extends WebTestCase
         $this->assertSame($statusCode, $response->getStatusCode());
 
         $responseContent = $response->getContent();
-
+        Assert::string($responseContent);
         $this->assertJson($responseContent);
 
+        /** @var array{title: string, type: string, statusCode: int} $decodedResponse */
         $decodedResponse = json_decode($responseContent, true);
 
         $this->assertSame($title, $decodedResponse['title']);

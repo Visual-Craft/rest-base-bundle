@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryString;
  */
 class MapQueryStringExceptionTest extends FunctionalTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         if (!class_exists(MapQueryString::class)) {
