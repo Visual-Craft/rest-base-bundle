@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace VisualCraft\RestBaseBundle\Tests\Functional;
 
 use Symfony\Component\HttpFoundation\Response;
-use Webmozart\Assert\Assert;
 
 /**
  * @internal
@@ -18,7 +17,7 @@ class AuthenticationExceptionTest extends FunctionalTestCase
         $json = json_encode([
             'login' => 'user1',
             'password' => 'incorrect_password',
-            JSON_THROW_ON_ERROR
+            JSON_THROW_ON_ERROR,
         ]);
         $this->assertIsString($json);
         $client->request(

@@ -62,13 +62,13 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
     }
 
     /**
-      @psalm-return iterable<array-key, array{
-      *     content: array{
-      *         comment: array|scalar,
-      *         rating?: int|array
-      *     }
-      * }>
-    */
+     * @psalm-return iterable<array-key, array{
+     *     content: array{
+     *         comment: array|scalar,
+     *         rating?: int|array
+     *     }
+     * }>
+     */
     public static function provideValidationErrorCases(): iterable
     {
         yield 'wrong_types' => [

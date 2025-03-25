@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace VisualCraft\RestBaseBundle\Tests\Functional;
 
 use Symfony\Component\HttpFoundation\Response;
-use Webmozart\Assert\Assert;
 
 /**
  * @internal

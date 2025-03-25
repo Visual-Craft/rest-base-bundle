@@ -6,7 +6,6 @@ namespace VisualCraft\RestBaseBundle\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
-use Webmozart\Assert\Assert;
 
 /**
  * @internal
@@ -19,7 +18,7 @@ class AuthenticationSuccessTest extends WebTestCase
         $json = json_encode([
             'login' => 'user1',
             'password' => 'correct_password',
-            JSON_THROW_ON_ERROR
+            JSON_THROW_ON_ERROR,
         ]);
         $this->assertIsString($json);
         $client->request(
