@@ -21,7 +21,7 @@ class AuthenticationSuccessTest extends WebTestCase
             'password' => 'correct_password',
             JSON_THROW_ON_ERROR
         ]);
-        Assert::string($json);
+        $this->assertIsString($json);
         $client->request(
             'POST',
             '/api/login',
@@ -34,7 +34,7 @@ class AuthenticationSuccessTest extends WebTestCase
 
         $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
         $content = $response->getContent();
-        Assert::string($content);
+        $this->assertIsString($content);
         $this->assertJsonStringEqualsJsonString('{"user": "user1"}', $content);
     }
 }

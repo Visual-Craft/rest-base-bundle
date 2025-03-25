@@ -26,8 +26,8 @@ use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 
 class VisualCraftRestBaseExtension extends Extension implements PrependExtensionInterface
 {
-    private const string ZONE_REQUEST_MATCHER_TAG = 'visual_craft.rest_base.zone_request_matcher';
-    private const string EXCEPTION_TO_PROBLEM_CONVERTER_TAG = 'visual_craft.rest_base.exception_to_problem_converter';
+    private const ZONE_REQUEST_MATCHER_TAG = 'visual_craft.rest_base.zone_request_matcher';
+    private const EXCEPTION_TO_PROBLEM_CONVERTER_TAG = 'visual_craft.rest_base.exception_to_problem_converter';
 
     #[\Override]
     public function load(array $configs, ContainerBuilder $container): void

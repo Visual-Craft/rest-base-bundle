@@ -15,8 +15,8 @@ class InvalidRequestBodyFormatExceptionTest extends FunctionalTestCase
     public function testInvalidRequestBodyFormatException(): void
     {
         $client = static::createClient();
-        $encodedData = json_encode(['field1' => '1', 'field2' => 'val2', 'field3' => 'val3', 'field33' => '111']);
-        Assert::string($encodedData);
+        $encodedData = json_encode(['field1' => '1', 'field2' => 'val2', 'field3' => 'val3', 'field33' => '111'], JSON_THROW_ON_ERROR);
+        $this->assertIsString($encodedData);
         $client->request('POST', '/api/process-request', [], [], ['CONTENT_TYPE' => 'application/json'], $encodedData);
 
         $this->assertProblemResponse(

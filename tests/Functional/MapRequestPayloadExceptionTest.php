@@ -69,7 +69,7 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
       *     }
       * }>
     */
-    private static function provideValidationErrorCases(): iterable
+    public static function provideValidationErrorCases(): iterable
     {
         yield 'wrong_types' => [
             'content' => ['comment' => 1, 'rating' => []],

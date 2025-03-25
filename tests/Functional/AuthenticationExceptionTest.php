@@ -20,7 +20,7 @@ class AuthenticationExceptionTest extends FunctionalTestCase
             'password' => 'incorrect_password',
             JSON_THROW_ON_ERROR
         ]);
-        Assert::string($json);
+        $this->assertIsString($json);
         $client->request(
             'POST',
             '/api/login',

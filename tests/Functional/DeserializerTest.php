@@ -16,8 +16,8 @@ class DeserializerTest extends WebTestCase
     public function testDeserializer(): void
     {
         $client = static::createClient();
-        $encodedData = json_encode(['field1' => 'field1', 'field2' => 'val2', 'field3' => 'val3']);
-        Assert::string($encodedData);
+        $encodedData = json_encode(['field1' => 'field1', 'field2' => 'val2', 'field3' => 'val3'], JSON_THROW_ON_ERROR);
+        $this->assertIsString($encodedData);
         $client->request(
             'POST',
             '/api/process-request',
@@ -30,7 +30,7 @@ class DeserializerTest extends WebTestCase
 
         $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
         $content = $response->getContent();
-        Assert::string($content);
+        $this->assertIsString($content);
         $this->assertJsonStringEqualsJsonString($encodedData, $content);
     }
 }

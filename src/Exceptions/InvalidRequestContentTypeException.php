@@ -10,8 +10,8 @@ namespace VisualCraft\RestBaseBundle\Exceptions;
  */
 class InvalidRequestContentTypeException extends InvalidRequestException
 {
-    public const int CODE_MISSING = 1;
-    public const int CODE_UNSUPPORTED = 2;
+    public const CODE_MISSING = 1;
+    public const CODE_UNSUPPORTED = 2;
 
     /**
      * @var array

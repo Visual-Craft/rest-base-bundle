@@ -15,8 +15,8 @@ class InvalidRequestContentTypeExceptionTest extends FunctionalTestCase
     public function testInvalidRequestContentTypeException(): void
     {
         $client = static::createClient();
-        $encodedData = json_encode(['field1' => '1', 'field2' => 'val2', 'field3' => 'val3']);
-        Assert::string($encodedData);
+        $encodedData = json_encode(['field1' => '1', 'field2' => 'val2', 'field3' => 'val3'], JSON_THROW_ON_ERROR);
+        $this->assertIsString($encodedData);
         $client->request('POST', '/api/process-request', [], [], ['CONTENT_TYPE' => 'text'], $encodedData);
 
         $this->assertProblemResponse(
