@@ -16,7 +16,6 @@ class DeserializerTest extends WebTestCase
     {
         $client = static::createClient();
         $encodedData = json_encode(['field1' => 'field1', 'field2' => 'val2', 'field3' => 'val3'], JSON_THROW_ON_ERROR);
-        $this->assertIsString($encodedData);
         $client->request(
             'POST',
             '/api/process-request',
