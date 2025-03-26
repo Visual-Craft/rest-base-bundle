@@ -10,7 +10,13 @@ namespace VisualCraft\RestBaseBundle\Exceptions;
  */
 class InvalidRequestContentTypeException extends InvalidRequestException
 {
+    /**
+     * @psalm-suppress MissingClassConstType
+     */
     public const CODE_MISSING = 1;
+    /**
+     * @psalm-suppress MissingClassConstType
+     */
     public const CODE_UNSUPPORTED = 2;
 
     /**

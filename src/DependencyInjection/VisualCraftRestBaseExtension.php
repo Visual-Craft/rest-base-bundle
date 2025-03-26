@@ -26,7 +26,13 @@ use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 
 class VisualCraftRestBaseExtension extends Extension implements PrependExtensionInterface
 {
+    /**
+     * @psalm-suppress MissingClassConstType
+     */
     private const ZONE_REQUEST_MATCHER_TAG = 'visual_craft.rest_base.zone_request_matcher';
+    /**
+     * @psalm-suppress MissingClassConstType
+     */
     private const EXCEPTION_TO_PROBLEM_CONVERTER_TAG = 'visual_craft.rest_base.exception_to_problem_converter';
 
     #[\Override]
