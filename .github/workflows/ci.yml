@@ -46,11 +46,11 @@ jobs:
 
       - name: Cs-check
         run: |
-          vendor/bin/php-cs-fixer fix --dry-run --diff -v --ansi
+          PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff -v --ansi
 
       - name: psalm
         run: |
-          PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/psalm --php-version=${{ matrix.php }}
+          vendor/bin/psalm --php-version=${{ matrix.php }}
 
       - name: Require doctrine/annotation
         if: matrix.php == '7.4'
