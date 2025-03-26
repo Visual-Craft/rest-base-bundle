@@ -16,7 +16,7 @@ use VisualCraft\RestBaseBundle\Validator\FailingValidator;
 
 /**
  * @deprecated since v0.3, use Symfony\Component\HttpKernel\Attribute\MapRequestPayload instead
- * @psalm-suppress DeprecatedClass
+ * @psalm-suppress DeprecatedClass, ClassMustBeFinal
  */
 class RequestBodyDeserializer
 {

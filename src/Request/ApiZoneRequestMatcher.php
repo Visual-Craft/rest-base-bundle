@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 use VisualCraft\RestBaseBundle\Constants;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class ApiZoneRequestMatcher implements RequestMatcherInterface
 {
     #[\Override]

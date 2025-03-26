@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 
 /**
  * @internal
+ * @psalm-suppress ClassMustBeFinal
  */
 class MapQueryParameterExceptionTest extends FunctionalTestCase
 {

@@ -13,6 +13,7 @@ use VisualCraft\RestBaseBundle\Problem\Problem;
 
 /**
  * @deprecated
+ * @psalm-suppress ClassMustBeFinal
  */
 class InvalidRequestBodyFormatExceptionConverter implements ExceptionToProblemConverterInterface
 {

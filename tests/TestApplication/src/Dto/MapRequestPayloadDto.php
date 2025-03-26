@@ -6,6 +6,9 @@ namespace VisualCraft\RestBaseBundle\Tests\TestApplication\Dto;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class MapRequestPayloadDto
 {
     #[Assert\NotBlank]

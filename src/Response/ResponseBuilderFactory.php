@@ -7,6 +7,9 @@ namespace VisualCraft\RestBaseBundle\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class ResponseBuilderFactory
 {
     /**

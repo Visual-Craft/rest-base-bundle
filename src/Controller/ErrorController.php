@@ -10,6 +10,9 @@ use Symfony\Component\HttpKernel\Controller\ErrorController as SymfonyErrorContr
 use VisualCraft\RestBaseBundle\Constants;
 use VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class ErrorController
 {
     /**

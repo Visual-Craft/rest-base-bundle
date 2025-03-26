@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
+ * @psalm-suppress ClassMustBeFinal
  */
 class AuthenticationSuccessTest extends WebTestCase
 {

@@ -9,6 +9,9 @@ use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class UnexpectedValueExceptionConverter implements ExceptionToProblemConverterInterface
 {
     #[\Override]

@@ -10,6 +10,7 @@ use VisualCraft\RestBaseBundle\DependencyInjection\Configuration;
 
 /**
  * @internal
+ * @psalm-suppress ClassMustBeFinal
  */
 class ConfigurationTest extends WebTestCase
 {

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
+ * @psalm-suppress ClassMustBeFinal
  */
 class InvalidRequestExceptionTest extends FunctionalTestCase
 {

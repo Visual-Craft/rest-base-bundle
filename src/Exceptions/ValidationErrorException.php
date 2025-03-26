@@ -8,6 +8,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * @deprecated
+ * @psalm-suppress ClassMustBeFinal
  */
 class ValidationErrorException extends \RuntimeException
 {

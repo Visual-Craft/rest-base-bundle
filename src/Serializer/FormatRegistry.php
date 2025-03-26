@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\Serializer;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class FormatRegistry
 {
     /**

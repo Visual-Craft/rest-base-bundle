@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
 /**
  * @internal
+ * @psalm-suppress ClassMustBeFinal
  */
 class MapRequestPayloadExceptionTest extends FunctionalTestCase
 {

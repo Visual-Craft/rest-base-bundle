@@ -24,6 +24,9 @@ use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory;
 use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class VisualCraftRestBaseExtension extends Extension implements PrependExtensionInterface
 {
     /**

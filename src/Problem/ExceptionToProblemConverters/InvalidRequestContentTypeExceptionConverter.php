@@ -11,7 +11,7 @@ use VisualCraft\RestBaseBundle\Problem\Problem;
 
 /**
  * @deprecated
- * @psalm-suppress DeprecatedClass
+ * @psalm-suppress DeprecatedClass, ClassMustBeFinal
  */
 class InvalidRequestContentTypeExceptionConverter implements ExceptionToProblemConverterInterface
 {

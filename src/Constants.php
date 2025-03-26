@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class Constants
 {
     /**

@@ -10,6 +10,9 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 use VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
 {
     private ProblemResponseFactory $problemResponseFactory;

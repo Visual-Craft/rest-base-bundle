@@ -9,6 +9,9 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class HttpExceptionInterfaceConverter implements ExceptionToProblemConverterInterface
 {
     #[\Override]

@@ -10,6 +10,9 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class AuthenticationFailureHandler implements AuthenticationFailureHandlerInterface
 {
     /**

@@ -11,6 +11,7 @@ use VisualCraft\RestBaseBundle\Problem\Problem;
 
 /**
  * @deprecated
+ * @psalm-suppress ClassMustBeFinal
  */
 class ValidationErrorExceptionConverter implements ExceptionToProblemConverterInterface
 {

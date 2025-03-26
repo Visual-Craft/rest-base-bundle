@@ -34,7 +34,6 @@
         <PossiblyUnusedProperty errorLevel="suppress"/>
         <PossiblyUnusedParam errorLevel="suppress"/>
         <UnusedPsalmSuppress errorLevel="suppress"/>
-        <ClassMustBeFinal errorLevel="suppress"/>
     </issueHandlers>
     <plugins>
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
