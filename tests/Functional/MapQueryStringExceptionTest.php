@@ -82,6 +82,6 @@ class MapQueryStringExceptionTest extends FunctionalTestCase
             '/api/map-query-string',
         );
 
-        $this->assertSame(Response::HTTP_NOT_FOUND, $client->getResponse()->getStatusCode());
+        $this->assertSame(Response::HTTP_BAD_REQUEST, $client->getResponse()->getStatusCode());
     }
 }
