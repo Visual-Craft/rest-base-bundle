@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use VisualCraft\RestBaseBundle\Exceptions\InvalidRequestException;
 
 /**
- * @psalm-suppress DeprecatedClass
+ * @psalm-suppress DeprecatedClass, ClassMustBeFinal
  */
 class ThrowInvalidRequestExceptionController extends AbstractController
 {

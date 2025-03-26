@@ -7,6 +7,9 @@ namespace VisualCraft\RestBaseBundle\Tests\TestApplication\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class LoginController extends AbstractController
 {
     public function __invoke(): JsonResponse

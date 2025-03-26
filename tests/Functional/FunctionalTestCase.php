@@ -17,9 +17,10 @@ class FunctionalTestCase extends WebTestCase
         $this->assertSame($statusCode, $response->getStatusCode());
 
         $responseContent = $response->getContent();
-
+        $this->assertIsString($responseContent);
         $this->assertJson($responseContent);
 
+        /** @var array{title: string, type: string, statusCode: int} $decodedResponse */
         $decodedResponse = json_decode($responseContent, true);
 
         $this->assertSame($title, $decodedResponse['title']);

@@ -25,6 +25,7 @@ final class Kernel extends SymfonyKernel
         parent::__construct('test', false);
     }
 
+    #[\Override]
     public function registerBundles(): iterable
     {
         return [
@@ -34,16 +35,19 @@ final class Kernel extends SymfonyKernel
         ];
     }
 
+    #[\Override]
     public function getCacheDir(): string
     {
         return sys_get_temp_dir() . '/com.github.visual-craft.rest-base-bundle/tests/var/' . $this->environment . '/cache';
     }
 
+    #[\Override]
     public function getLogDir(): string
     {
         return sys_get_temp_dir() . '/com.github.visual-craft.rest-base-bundle/tests/var/' . $this->environment . '/log';
     }
 
+    #[\Override]
     public function getProjectDir(): string
     {
         return \dirname(__DIR__);

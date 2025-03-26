@@ -11,10 +11,11 @@ use VisualCraft\RestBaseBundle\Problem\Problem;
 
 /**
  * @deprecated
- * @psalm-suppress DeprecatedClass
+ * @psalm-suppress DeprecatedClass, ClassMustBeFinal
  */
 class InvalidRequestContentTypeExceptionConverter implements ExceptionToProblemConverterInterface
 {
+    #[\Override]
     public function convert(\Throwable $exception): ?Problem
     {
         if (!$exception instanceof InvalidRequestContentTypeException) {

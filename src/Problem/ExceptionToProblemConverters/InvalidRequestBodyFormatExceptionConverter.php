@@ -13,9 +13,11 @@ use VisualCraft\RestBaseBundle\Problem\Problem;
 
 /**
  * @deprecated
+ * @psalm-suppress ClassMustBeFinal
  */
 class InvalidRequestBodyFormatExceptionConverter implements ExceptionToProblemConverterInterface
 {
+    #[\Override]
     public function convert(\Throwable $exception): ?Problem
     {
         if (!$exception instanceof InvalidRequestBodyFormatException) {

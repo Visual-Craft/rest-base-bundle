@@ -16,7 +16,7 @@ use VisualCraft\RestBaseBundle\Validator\FailingValidator;
 
 /**
  * @deprecated since v0.3, use Symfony\Component\HttpKernel\Attribute\MapRequestPayload instead
- * @psalm-suppress DeprecatedClass
+ * @psalm-suppress DeprecatedClass, ClassMustBeFinal
  */
 class RequestBodyDeserializer
 {
@@ -56,7 +56,7 @@ class RequestBodyDeserializer
         } else {
             $contentType = $request->headers->get('Content-Type');
 
-            if (!$contentType) {
+            if ($contentType === null) {
                 throw new InvalidRequestContentTypeException(
                     'Missing Content-Type',
                     InvalidRequestContentTypeException::CODE_MISSING,

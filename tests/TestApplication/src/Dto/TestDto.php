@@ -7,6 +7,9 @@ namespace VisualCraft\RestBaseBundle\Tests\TestApplication\Dto;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class TestDto
 {
     /**

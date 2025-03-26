@@ -6,12 +6,15 @@ namespace VisualCraft\RestBaseBundle\Tests\Functional;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @internal
+ * @psalm-suppress ClassMustBeFinal
  */
 class MapQueryStringExceptionTest extends FunctionalTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         if (!class_exists(MapQueryString::class)) {
@@ -80,6 +83,10 @@ class MapQueryStringExceptionTest extends FunctionalTestCase
             '/api/map-query-string',
         );
 
-        $this->assertSame(Response::HTTP_NOT_FOUND, $client->getResponse()->getStatusCode());
+        if (Kernel::MAJOR_VERSION >= 7) {
+            $this->assertSame(Response::HTTP_BAD_REQUEST, $client->getResponse()->getStatusCode());
+        } else {
+            $this->assertSame(Response::HTTP_NOT_FOUND, $client->getResponse()->getStatusCode());
+        }
     }
 }

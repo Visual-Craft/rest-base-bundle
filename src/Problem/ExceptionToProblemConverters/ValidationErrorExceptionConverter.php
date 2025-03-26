@@ -11,9 +11,11 @@ use VisualCraft\RestBaseBundle\Problem\Problem;
 
 /**
  * @deprecated
+ * @psalm-suppress ClassMustBeFinal
  */
 class ValidationErrorExceptionConverter implements ExceptionToProblemConverterInterface
 {
+    #[\Override]
     public function convert(\Throwable $exception): ?Problem
     {
         if (!$exception instanceof ValidationErrorException) {

@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use VisualCraft\RestBaseBundle\Serializer\FormatRegistry;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class ResponseBuilder
 {
     /**

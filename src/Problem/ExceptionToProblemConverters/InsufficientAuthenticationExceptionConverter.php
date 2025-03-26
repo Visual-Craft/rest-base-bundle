@@ -9,8 +9,12 @@ use Symfony\Component\Security\Core\Exception\InsufficientAuthenticationExceptio
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class InsufficientAuthenticationExceptionConverter implements ExceptionToProblemConverterInterface
 {
+    #[\Override]
     public function convert(\Throwable $exception): ?Problem
     {
         if (!$exception instanceof InsufficientAuthenticationException) {

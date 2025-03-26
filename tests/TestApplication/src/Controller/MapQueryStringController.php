@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Dto\MapQueryStringDto;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class MapQueryStringController extends AbstractController
 {
     /** @psalm-suppress UndefinedAttributeClass, ParseError */

@@ -6,11 +6,17 @@ namespace VisualCraft\RestBaseBundle\Exceptions;
 
 /**
  * @deprecated
- * @psalm-suppress DeprecatedClass
+ * @psalm-suppress DeprecatedClass, ClassMustBeFinal
  */
 class InvalidRequestContentTypeException extends InvalidRequestException
 {
+    /**
+     * @psalm-suppress MissingClassConstType
+     */
     public const CODE_MISSING = 1;
+    /**
+     * @psalm-suppress MissingClassConstType
+     */
     public const CODE_UNSUPPORTED = 2;
 
     /**
@@ -22,7 +28,7 @@ class InvalidRequestContentTypeException extends InvalidRequestException
         string $message = '',
         int $code = 0,
         array $validContentTypes = [],
-        \Throwable $previous = null
+        ?\Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
         $this->validContentTypes = $validContentTypes;

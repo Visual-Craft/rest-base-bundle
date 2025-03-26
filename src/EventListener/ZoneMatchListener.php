@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use VisualCraft\RestBaseBundle\Constants;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class ZoneMatchListener
 {
     /**

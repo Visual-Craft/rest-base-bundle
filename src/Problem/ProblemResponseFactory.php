@@ -7,6 +7,9 @@ namespace VisualCraft\RestBaseBundle\Problem;
 use Symfony\Component\HttpFoundation\Response;
 use VisualCraft\RestBaseBundle\Response\ResponseBuilderFactory;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class ProblemResponseFactory
 {
     /**
