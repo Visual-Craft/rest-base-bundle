@@ -50,7 +50,7 @@ jobs:
 
       - name: psalm
         run: |
-          vendor/bin/psalm --php-version=${{ matrix.php }}
+          PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/psalm --php-version=${{ matrix.php }}
 
       - name: Require doctrine/annotation
         if: matrix.php == '7.4'
