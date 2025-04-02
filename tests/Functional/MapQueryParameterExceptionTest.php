@@ -55,7 +55,7 @@ class MapQueryParameterExceptionTest extends FunctionalTestCase
      *     firstName?: string|array
      * }>
      */
-    private function provideNotFoundWhenRequiredParameterIsAbsentOrInvalidTypeCases(): iterable
+    private static function provideNotFoundWhenRequiredParameterIsAbsentOrInvalidTypeCases(): iterable
     {
         yield 'wrong_types' => [
             'content' => ['ids' => 'test', 'firstName' => []],

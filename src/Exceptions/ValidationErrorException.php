@@ -20,7 +20,7 @@ class ValidationErrorException extends \RuntimeException
         ConstraintViolationListInterface $violationList,
         string $message = '',
         int $code = 0,
-        \Throwable $previous = null
+        ?\Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
         $this->violationList = $violationList;

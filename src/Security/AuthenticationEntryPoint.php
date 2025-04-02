@@ -19,7 +19,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
         $this->problemResponseFactory = $problemResponseFactory;
     }
 
-    public function start(Request $request, AuthenticationException $authException = null): Response
+    public function start(Request $request, ?AuthenticationException $authException = null): Response
     {
         return $this->problemResponseFactory->create($authException ?? new AuthenticationException('Authentication required'));
     }

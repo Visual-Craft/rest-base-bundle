@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
+use PhpCsFixer\Finder;
 use VisualCraft\PhpCsFixerConfig;
 
-$finder = PhpCsFixer\Finder::create()
+$finder = Finder::create()
     ->in(__DIR__ . '/src')
     ->in(__DIR__ . '/tests/Functional')
     ->in(__DIR__ . '/tests/Unit')

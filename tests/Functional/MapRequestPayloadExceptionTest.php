@@ -60,6 +60,23 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
         );
     }
 
+    /**
+     * @psalm-return iterable<array-key, array{
+     *     comment: array|string,
+     *     rating?: int|array
+     * }>
+     */
+    private static function provideValidationErrorCases(): iterable
+    {
+        yield 'wrong_types' => [
+            'content' => ['comment' => 1, 'rating' => []],
+        ];
+
+        yield 'required_parameter_is_absent' => [
+            'content' => ['comment' => []],
+        ];
+    }
+
     public function testMalformedDataError(): void
     {
         $client = static::createClient();
@@ -127,22 +144,5 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
             'invalid_request_body_format',
             'Invalid request body format'
         );
-    }
-
-    /**
-     * @psalm-return iterable<array-key, array{
-     *     comment: array|string,
-     *     rating?: int|array
-     * }>
-     */
-    private function provideValidationErrorCases(): iterable
-    {
-        yield 'wrong_types' => [
-            'content' => ['comment' => 1, 'rating' => []],
-        ];
-
-        yield 'required_parameter_is_absent' => [
-            'content' => ['comment' => []],
-        ];
     }
 }

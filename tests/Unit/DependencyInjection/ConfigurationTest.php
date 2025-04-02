@@ -56,7 +56,7 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
-    public function provideZoneValidCases(): iterable
+    public static function provideZoneValidCases(): iterable
     {
         yield [[], []];
         yield [
@@ -157,7 +157,7 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
-    public function provideDebugValidCases(): iterable
+    public static function provideDebugValidCases(): iterable
     {
         yield [
             true,
@@ -187,7 +187,7 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
-    public function provideMimeTypesValidCases(): iterable
+    public static function provideMimeTypesValidCases(): iterable
     {
         yield [
             [

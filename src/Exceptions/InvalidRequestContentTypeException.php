@@ -22,7 +22,7 @@ class InvalidRequestContentTypeException extends InvalidRequestException
         string $message = '',
         int $code = 0,
         array $validContentTypes = [],
-        \Throwable $previous = null
+        ?\Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
         $this->validContentTypes = $validContentTypes;
