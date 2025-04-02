@@ -9,6 +9,9 @@ use Symfony\Component\Security\Core\Exception\TooManyLoginAttemptsAuthentication
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class TooManyLoginAttemptsAuthenticationExceptionConverter implements ExceptionToProblemConverterInterface
 {
     #[\Override]
