@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace VisualCraft\RestBaseBundle\Problem;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class Problem
 {
     /**

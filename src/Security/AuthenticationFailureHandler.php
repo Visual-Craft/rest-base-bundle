@@ -10,6 +10,9 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 use VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class AuthenticationFailureHandler implements AuthenticationFailureHandlerInterface
 {
     /**
@@ -22,6 +25,7 @@ class AuthenticationFailureHandler implements AuthenticationFailureHandlerInterf
         $this->problemResponseFactory = $problemResponseFactory;
     }
 
+    #[\Override]
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
     {
         return $this->problemResponseFactory->create($exception);

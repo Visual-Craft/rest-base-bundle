@@ -10,6 +10,9 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Dto\MapQueryStringDto;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class MapQueryParameterController extends AbstractController
 {
     /** @psalm-suppress UndefinedAttributeClass, ParseError */

@@ -9,8 +9,12 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class AccessDeniedHttpExceptionConverter implements ExceptionToProblemConverterInterface
 {
+    #[\Override]
     public function convert(\Throwable $exception): ?Problem
     {
         if ($exception instanceof AccessDeniedHttpException) {

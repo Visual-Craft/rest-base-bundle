@@ -10,9 +10,13 @@ use Symfony\Component\Serializer\Exception\UnsupportedFormatException;
 use VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverterInterface;
 use VisualCraft\RestBaseBundle\Problem\Problem;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class HttExceptionUnsupportedFormatExceptionConverter implements ExceptionToProblemConverterInterface
 {
     /** @psalm-suppress MixedInferredReturnType */
+    #[\Override]
     public function convert(\Throwable $exception): ?Problem
     {
         $previousException = $exception->getPrevious();

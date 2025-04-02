@@ -9,9 +9,11 @@ use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
 /**
  * @internal
+ * @psalm-suppress ClassMustBeFinal
  */
 class MapRequestPayloadExceptionTest extends FunctionalTestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         if (!class_exists(MapRequestPayload::class)) {
@@ -62,11 +64,13 @@ class MapRequestPayloadExceptionTest extends FunctionalTestCase
 
     /**
      * @psalm-return iterable<array-key, array{
-     *     comment: array|string,
-     *     rating?: int|array
+     *     content: array{
+     *         comment: array|scalar,
+     *         rating?: int|array
+     *     }
      * }>
      */
-    private static function provideValidationErrorCases(): iterable
+    public static function provideValidationErrorCases(): iterable
     {
         yield 'wrong_types' => [
             'content' => ['comment' => 1, 'rating' => []],

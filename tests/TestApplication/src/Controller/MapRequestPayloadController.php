@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Dto\MapRequestPayloadDto;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class MapRequestPayloadController extends AbstractController
 {
     /** @psalm-suppress UndefinedAttributeClass, ParseError */

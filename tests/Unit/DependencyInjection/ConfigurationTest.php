@@ -10,6 +10,7 @@ use VisualCraft\RestBaseBundle\DependencyInjection\Configuration;
 
 /**
  * @internal
+ * @psalm-suppress ClassMustBeFinal
  */
 class ConfigurationTest extends WebTestCase
 {
@@ -56,6 +57,9 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
+    /**
+     * @psalm-return iterable<array-key, array<array-key, array>>
+     */
     public static function provideZoneValidCases(): iterable
     {
         yield [[], []];
@@ -142,7 +146,7 @@ class ConfigurationTest extends WebTestCase
     /**
      * @dataProvider provideDebugValidCases
      */
-    public function testDebugValid($configurationValues, $expectedProcessedConfigurationValues): void
+    public function testDebugValid(bool $configurationValues, bool $expectedProcessedConfigurationValues): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -157,6 +161,9 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
+    /**
+     * @psalm-return iterable<array-key, array{0: bool, 1: bool}>
+     */
     public static function provideDebugValidCases(): iterable
     {
         yield [
@@ -187,6 +194,9 @@ class ConfigurationTest extends WebTestCase
         );
     }
 
+    /**
+     * @psalm-return iterable<array-key, array<array-key, array<string, string>>>
+     */
     public static function provideMimeTypesValidCases(): iterable
     {
         yield [
@@ -209,6 +219,7 @@ class ConfigurationTest extends WebTestCase
         ];
     }
 
+    #[\Override]
     protected function getConfiguration(): Configuration
     {
         return new Configuration();

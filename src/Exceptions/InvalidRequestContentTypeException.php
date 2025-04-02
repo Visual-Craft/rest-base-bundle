@@ -6,11 +6,17 @@ namespace VisualCraft\RestBaseBundle\Exceptions;
 
 /**
  * @deprecated
- * @psalm-suppress DeprecatedClass
+ * @psalm-suppress DeprecatedClass, ClassMustBeFinal
  */
 class InvalidRequestContentTypeException extends InvalidRequestException
 {
+    /**
+     * @psalm-suppress MissingClassConstType
+     */
     public const CODE_MISSING = 1;
+    /**
+     * @psalm-suppress MissingClassConstType
+     */
     public const CODE_UNSUPPORTED = 2;
 
     /**

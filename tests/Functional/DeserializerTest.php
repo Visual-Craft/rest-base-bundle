@@ -9,13 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
+ * @psalm-suppress ClassMustBeFinal
  */
 class DeserializerTest extends WebTestCase
 {
     public function testDeserializer(): void
     {
         $client = static::createClient();
-        $encodedData = json_encode(['field1' => 'field1', 'field2' => 'val2', 'field3' => 'val3']);
+        $encodedData = json_encode(['field1' => 'field1', 'field2' => 'val2', 'field3' => 'val3'], JSON_THROW_ON_ERROR);
         $client->request(
             'POST',
             '/api/process-request',
@@ -27,6 +28,8 @@ class DeserializerTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
-        $this->assertJsonStringEqualsJsonString($encodedData, $response->getContent());
+        $content = $response->getContent();
+        $this->assertIsString($content);
+        $this->assertJsonStringEqualsJsonString($encodedData, $content);
     }
 }

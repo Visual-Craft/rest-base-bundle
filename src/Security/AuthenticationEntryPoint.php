@@ -10,6 +10,9 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 use VisualCraft\RestBaseBundle\Problem\ProblemResponseFactory;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
 {
     private ProblemResponseFactory $problemResponseFactory;
@@ -19,6 +22,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
         $this->problemResponseFactory = $problemResponseFactory;
     }
 
+    #[\Override]
     public function start(Request $request, ?AuthenticationException $authException = null): Response
     {
         return $this->problemResponseFactory->create($authException ?? new AuthenticationException('Authentication required'));

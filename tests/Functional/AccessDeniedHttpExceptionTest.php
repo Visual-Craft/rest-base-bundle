@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\ChainUserProvider;
 
 /**
  * @internal
+ * @psalm-suppress ClassMustBeFinal
  */
 class AccessDeniedHttpExceptionTest extends FunctionalTestCase
 {

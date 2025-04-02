@@ -11,7 +11,7 @@ use VisualCraft\RestBaseBundle\Request\RequestBodyDeserializer;
 use VisualCraft\RestBaseBundle\Tests\TestApplication\Dto\TestDto;
 
 /**
- * @psalm-suppress DeprecatedClass
+ * @psalm-suppress DeprecatedClass, ClassMustBeFinal
  */
 class ProcessRequestController extends AbstractController
 {
