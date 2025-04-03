@@ -248,7 +248,16 @@ Response body:
   "statusCode": 429,
   "type": "too_many_login_attempts",
 }
+
 ```
+Headers:
+```json
+{
+  "X-RateLimit-Retry-After": 300
+}
+```
+
+
 ### Enable support security exceptions
 If you use separate firewall for your API, use `VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint`
 ```yaml
