@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @internal
  */
-class FunctionalTestCase extends WebTestCase
+abstract class FunctionalTestCase extends WebTestCase
 {
     #[\Override]
     protected function tearDown(): void
