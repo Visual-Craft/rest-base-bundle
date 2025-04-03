@@ -22,7 +22,7 @@ return static function (ContainerConfigurator $container): void {
         ->args([
             '$globalFactory' => service('limiter.ip_login'),
             '$localFactory' => service('limiter.username_ip_login'),
-            '$secret' => '%kernel.secret%',
+            '$secret' => 'secret',
         ])
     ;
 };
