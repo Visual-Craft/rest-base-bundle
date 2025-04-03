@@ -4,7 +4,7 @@
     "description": "Symfony Bundle which provides base foundation for REST API applications",
     "license": "MIT",
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.1",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.4 || ^2.0",
         "symfony/framework-bundle": "^5.4 || ^6.0 || ^7.0",
@@ -16,7 +16,7 @@
         "symfony/yaml": "^5.4 || ^6.0 || ^7.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^10.0",
         "ext-json": "*",
         "matthiasnoback/symfony-config-test": "^4.3 || ^5.1",
         "psalm/plugin-phpunit": "^0.19",
@@ -25,7 +25,9 @@
         "symfony/browser-kit": "^5.4 || ^6.0 || ^7.0",
         "symfony/phpunit-bridge": "^5.4 || ^6.0 || ^7.0",
         "vimeo/psalm": "^6.0 ",
-        "visual-craft/php-cs-fixer-config": "^0.3.1"
+        "visual-craft/php-cs-fixer-config": "^0.3.1",
+        "symfony/rate-limiter": "^5.4 || ^6.0 || ^7.0",
+        "symfony/lock": "^5.4 || ^6.0 || ^7.0"
     },
     "autoload": {
         "psr-4": {

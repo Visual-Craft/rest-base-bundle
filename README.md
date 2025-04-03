@@ -238,6 +238,24 @@ Response body:
   }
 }
 ```
+
+----
+#### Symfony\Component\Security\Core\Exception\TooManyLoginAttemptsAuthenticationException
+Response body:
+```json
+{
+  "title": "Login rate limit exceeded",
+  "statusCode": 429,
+  "type": "too_many_login_attempts",
+}
+
+```
+Response headers:
+```
+  X-RateLimit-Retry-After: 300
+```
+
+
 ### Enable support security exceptions
 If you use separate firewall for your API, use `VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint`
 ```yaml

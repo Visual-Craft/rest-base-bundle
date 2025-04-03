@@ -20,6 +20,9 @@ return static function (ContainerConfigurator $container): void {
                     'password_path' => 'password',
                     'failure_handler' => \VisualCraft\RestBaseBundle\Security\AuthenticationFailureHandler::class,
                 ],
+                'login_throttling' => [
+                    'limiter' => 'app.login_rate_limiter'
+                ],
             ],
         ],
         'password_hashers' => [

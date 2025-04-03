@@ -40,7 +40,6 @@ jobs:
       - name: Install dependencies
         run: |
           composer update --prefer-dist
-          vendor/bin/simple-phpunit install
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
@@ -52,11 +51,7 @@ jobs:
         run: |
           vendor/bin/psalm --php-version=${{ matrix.php }}
 
-      - name: Require doctrine/annotation
-        if: matrix.php == '7.4'
-        run: composer require doctrine/annotations --no-interaction
-
       - name: Test
         run: |
           composer validate --strict --no-check-lock
-          vendor/bin/simple-phpunit
+          vendor/bin/phpunit

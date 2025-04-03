@@ -10,8 +10,16 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @internal
  */
-class FunctionalTestCase extends WebTestCase
+abstract class FunctionalTestCase extends WebTestCase
 {
+    #[\Override]
+    protected function tearDown(): void
+    {
+        /** @psalm-suppress MixedMethodCall, PossiblyNullReference */
+        static::getContainer()->get('cache.global_clearer')->clearPool('cache.rate_limiter');
+        parent::tearDown();
+    }
+
     protected function assertProblemResponse(Response $response, int $statusCode, string $type, string $title): void
     {
         $this->assertSame($statusCode, $response->getStatusCode());

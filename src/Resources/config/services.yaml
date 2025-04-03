@@ -24,6 +24,7 @@ services:
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\HttExceptionUnsupportedFormatExceptionConverter: ~
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\UnexpectedValueExceptionConverter: ~
     VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\ExtraAttributesExceptionConverter: ~
+    VisualCraft\RestBaseBundle\Problem\ExceptionToProblemConverters\TooManyLoginAttemptsAuthenticationExceptionConverter: ~
     VisualCraft\RestBaseBundle\Security\AuthenticationEntryPoint: ~
     VisualCraft\RestBaseBundle\Security\AuthenticationFailureHandler: ~
     VisualCraft\RestBaseBundle\Serializer\FormatRegistry: ~
