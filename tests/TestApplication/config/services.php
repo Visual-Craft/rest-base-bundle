@@ -18,4 +18,11 @@ return static function (ContainerConfigurator $container): void {
     ;
 
     $container->services()->set('logger', NullLogger::class);
+    $container->services()->set('app.login_rate_limiter', 'Symfony\Component\Security\Http\RateLimiter\DefaultLoginRateLimiter')
+        ->args([
+            '$globalFactory' => service('limiter.ip_login'),
+            '$localFactory' => service('limiter.username_ip_login'),
+            '$secret' => '%kernel.secret%',
+        ])
+    ;
 };

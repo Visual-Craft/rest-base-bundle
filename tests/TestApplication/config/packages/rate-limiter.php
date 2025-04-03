@@ -14,18 +14,11 @@ return static function (ContainerConfigurator $container): void {
             ],
             'ip_login' => [
                 'policy' => 'sliding_window',
-                'limit' => 6,
+                'limit' => 2,
                 'interval' => '15 minutes',
             ],
         ],
     ];
 
     $container->extension('framework', $configuration);
-    $container->services()->set('limiter.username_ip_login', 'Symfony\Component\Security\Http\RateLimiter\DefaultLoginRateLimiter')
-        ->args([
-            '$globalFactory' => '@limiter.ip_login',
-            '$localFactory' => '@limiter.username_ip_login',
-            '$secret' => '%kernel.secret%',
-        ])
-    ;
 };
