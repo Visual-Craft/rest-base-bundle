@@ -251,10 +251,8 @@ Response body:
 
 ```
 Response headers:
-```json
-{
-  "X-RateLimit-Retry-After": 300
-}
+```
+  X-RateLimit-Retry-After: 300
 ```
 
 
