@@ -40,7 +40,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer update --prefer-dist
-          vendor/bin/simple-phpunit install
+          vendor/bin/phpunit install
         env:
           SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
