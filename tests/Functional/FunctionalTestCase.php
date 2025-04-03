@@ -12,6 +12,14 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class FunctionalTestCase extends WebTestCase
 {
+    #[\Override]
+    protected function tearDown(): void
+    {
+        /** @psalm-suppress MixedMethodCall */
+        static::getContainer()->get('cache.global_clearer')->clearPool('cache.rate_limiter');
+        parent::tearDown();
+    }
+
     protected function assertProblemResponse(Response $response, int $statusCode, string $type, string $title): void
     {
         $this->assertSame($statusCode, $response->getStatusCode());
