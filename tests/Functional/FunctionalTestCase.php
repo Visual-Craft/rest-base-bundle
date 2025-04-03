@@ -15,7 +15,7 @@ class FunctionalTestCase extends WebTestCase
     #[\Override]
     protected function tearDown(): void
     {
-        /** @psalm-suppress MixedMethodCall */
+        /** @psalm-suppress MixedMethodCall, PossiblyNullReference */
         static::getContainer()->get('cache.global_clearer')->clearPool('cache.rate_limiter');
         parent::tearDown();
     }
