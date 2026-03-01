@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MapQueryStringDto
 {
-    #[Assert\Choice(['placed', 'shipped', 'delivered'])]
+    #[Assert\Choice(choices: ['placed', 'shipped', 'delivered'])]
     public ?string $status;
 
     public float $total;
