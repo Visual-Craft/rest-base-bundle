@@ -25,7 +25,7 @@
         "symfony/browser-kit": "^5.4 || ^6.0 || ^7.0 || ^8.0",
         "symfony/phpunit-bridge": "^5.4 || ^6.0 || ^7.0 || ^8.0",
         "vimeo/psalm": "^6.14.3 ",
-        "visual-craft/php-cs-fixer-config": "^0.5",
+        "visual-craft/php-cs-fixer-config": "^0.6",
         "symfony/rate-limiter": "^5.4 || ^6.0 || ^7.0 || ^8.0",
         "symfony/lock": "^5.4 || ^6.0 || ^7.0 || ^8.0"
     },
